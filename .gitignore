@@ -5,7 +5,6 @@ __pycache__/
 
 # Manim related folders
 source/media/
-media/
 mth-531/media/
 mth-531/_static/
 mth-531/pre-reqs/media/
@@ -75,8 +74,6 @@ instance/
 # Scrapy stuff:
 .scrapy
 
-# Sphinx documentation
-docs/_build/
 
 # PyBuilder
 .pybuilder/
