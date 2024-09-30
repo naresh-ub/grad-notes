@@ -3,6 +3,13 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Manim related folders
+source/media/
+media/
+mth-531/media/
+mth-531/_static/
+mth-531/pre-reqs/media/
+
 # C extensions
 *.so
 

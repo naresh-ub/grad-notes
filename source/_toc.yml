@@ -1,0 +1,26 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+parts:
+- caption: MTH 531 Analysis
+  chapters:
+  - file: mth-531/intro
+    sections:
+    - file: mth-531/pre-reqs/intro
+      sections:
+      - file: markdown
+      - file: start/build
+      - file: start/new-file
+      - file: start/publish
+      - file: start/example-book
+  - file: tutorials/references
+# chapters:
+# - file: website-todo
+# parts:
+#   - file: markdown
+# # - file: markdown
+# # - file: notebooks
+# # - file: markdown-notebooks
+# # - file: plotly_test
