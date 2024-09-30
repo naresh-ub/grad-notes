@@ -1,5 +1,6 @@
 name: Build Notebook Container
-on: [push] # Or other events like pull_request, etc.
+on: 
+  workflow_dispatch: # Trigger the workflow only on manual runs
 permissions:
   contents: write
 

@@ -15,13 +15,6 @@ def start():
     logger.addHandler(ch)
     return log_capture_string, ch, logger
 
-def render_scene_with_quality(scene_class, quality):
-    log_capture_string, ch, logger = start()
-    config.flush_cache = True
-    config.pixel_height, config.pixel_width, config.frame_rate = q_dict[quality]
-    scene = scene_class()
-    show(quality, scene, log_capture_string)
-
 q_dict = {'-ql': (480, 854, 15), '-qm': (720, 1280, 30), '-qh': (1080, 1920, 60), '-qk': (2160, 3840, 60)}
 
 def show(quality_flag, sc, log_capture_string):
@@ -43,7 +36,7 @@ def show(quality_flag, sc, log_capture_string):
         print("Could not find the file path in Manim's output.")
 
 def display_video_or_image(file_path, is_video):
-    # clear_output(wait=True)
+    clear_output(wait=True)
     if is_video:
         video_url = upload_file(file_path)
         if video_url:
@@ -72,12 +65,18 @@ import io
 import re
 from IPython.display import HTML
 
-def render_local(scene_class, quality):
+def render_manim(scene_class, quality, render_mode):
     log_capture_string, ch, logger = start()
     config.flush_cache = True
     config.pixel_height, config.pixel_width, config.frame_rate = q_dict[quality]
     scene = scene_class()
-    show_local(quality, scene, log_capture_string)
+
+    if render_mode == "local":
+        show_local(quality, scene, log_capture_string)
+    elif render_mode == "browser":
+        show(quality, scene, log_capture_string)
+    else:
+        raise ValueError(f"Invalid render_mode: {render_mode}. Choose 'local' or 'browser'.")
 
 def show_local(quality, sc, log_capture_string):
     config.flush_cache = True
@@ -150,6 +149,9 @@ def display_file(file_path):
     
     # Copy the file to the local path if needed
     shutil.copy(file_path, local_file_path)
+    
+    # Delete the media folder in current directory
+    shutil.rmtree('media', ignore_errors=True)
     
     # Relative path for rendering (this works in deployed docs)
     relative_media_path = os.path.join(relative_to_source, '_static', 'media', unique_file_name)

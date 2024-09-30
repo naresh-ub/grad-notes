@@ -12,8 +12,7 @@ if utils_path not in sys.path:
     sys.path.append(utils_path)
 
 # Manim related
-from utils.render_utils import render_local, render_scene_with_quality
-from utils.manim_utils import arrays, graphs, grids, linkedlists, queues, stacks, trees
+from utils.render_utils import render_manim
 from manim import *
 
 import matplotlib.pyplot as plt
