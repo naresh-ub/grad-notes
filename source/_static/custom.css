@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Gudea:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap');
 
 :root[data-mode="light"] .CodeMirror {
     color: #000000;
@@ -104,20 +105,18 @@ body {
 }
 
 pre, code {
-    font-family: 'JetBrains Mono', monospace !important;
+    font-family: "Fira Code", monospace, !important;
     font-size: 0.8em; /* Adjust the size as needed */
-    white-space: pre-wrap !important; 
-    word-break: break-all;
 }
 
 /* Apply JetBrains Mono to CodeMirror instances (used by sphinx-thebe) */
 .CodeMirror {
-    font-family: 'JetBrains Mono', monospace !important;
+    font-family: "Fira Code", monospace, !important;
 }
 
 /* Ensure the lines inside CodeMirror use the same font */
 .CodeMirror-lines {
-    font-family: 'JetBrains Mono', monospace !important;
+    font-family: "Fira Code", monospace, !important;
 }
 
 h1, h2, h3, h4, h5, h6 {

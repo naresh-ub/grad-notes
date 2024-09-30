@@ -43,7 +43,7 @@ def show(quality_flag, sc, log_capture_string):
         print("Could not find the file path in Manim's output.")
 
 def display_video_or_image(file_path, is_video):
-    clear_output(wait=True)
+    # clear_output(wait=True)
     if is_video:
         video_url = upload_file(file_path)
         if video_url:
@@ -107,46 +107,67 @@ def show_local(quality, sc, log_capture_string):
         print("Could not find the file path in Manim's output.")
 
 def display_file(file_path):
-    print("Entered display_file")
-    # Find the "source" folder in the file path
-    path_parts = file_path.split(os.sep)  # Split by the system's path separator
-    if "source" in path_parts:
-        source_index = path_parts.index("source")
-        source_path = os.sep.join(path_parts[:source_index + 1])  # Build the path until "source"
-    else:
-        raise ValueError("The provided path does not contain a 'source' folder.")
+    # Get the current working directory
+    current_dir = os.getcwd()
     
-    # Get the file extension
-    file_extension = os.path.splitext(file_path)[1].lower()
+    # Split the file path by system path separator
+    path_parts = file_path.split(os.sep)
     
-    # Create media folder inside the source path if it doesn't exist
-    media_folder = os.path.join(source_path, '_static/media')
+    # Traverse back from the current directory to find the "source" folder
+    relative_to_source = ''
+    while not os.path.exists(os.path.join(current_dir, 'source')):
+        print("Current dir:", current_dir)
+        current_dir = os.path.dirname(current_dir)  # Move up one directory
+        relative_to_source = os.path.join('..', relative_to_source)  # Add one level up to relative path
+    
+    # remove "../" from the start of the relative path
+    relative_to_source = relative_to_source[3:]
+    
+    print("Relative to source:", relative_to_source)
+
+    # Get the path to the "_static/media" folder inside "source"
+    media_folder = os.path.join(current_dir, 'source', '_static', 'media')
+
+    # Check if the media folder exists, and create it if not
     if not os.path.exists(media_folder):
         os.makedirs(media_folder)
     
     # Create a unique file name to avoid collisions
     timestamp = int(time.time())  # Current timestamp to avoid file name collision
     base_file_name = os.path.basename(file_path)
+    file_extension = os.path.splitext(file_path)[1].lower()
     unique_file_name = f"{os.path.splitext(base_file_name)[0]}_{timestamp}{file_extension}"
     
-    # Define the local path where the file will be saved
+    # Define the local file path (absolute) and relative file path for rendering
     local_file_path = os.path.join(media_folder, unique_file_name)
     
-    # Copy the file to the local path
+    # Remove any existing files with the same base name
+    base_name_without_extension = os.path.splitext(base_file_name)[0]
+    for existing_file in os.listdir(media_folder):
+        if existing_file.startswith(base_name_without_extension) and existing_file.endswith('.mp4'):
+            existing_file_path = os.path.join(media_folder, existing_file)
+            os.remove(existing_file_path)  # Remove the old file
+    
+    # Copy the file to the local path if needed
     shutil.copy(file_path, local_file_path)
     
+    # Relative path for rendering (this works in deployed docs)
+    relative_media_path = os.path.join(relative_to_source, '_static', 'media', unique_file_name)
+    
+    # Clear previous output
     clear_output(wait=True)
+    
     # Render the file based on its extension
     if file_extension == '.mp4':
         display(HTML(f"""
         <div style="width: 100%;">
           <video width="100%" controls>
-              <source src="{local_file_path}" type="video/mp4">
+              <source src="{relative_media_path}" type="video/mp4">
               Your browser does not support the video tag.
           </video>
         </div>
         """))
     elif file_extension == '.png':
-        display(Image(filename=local_file_path))
+        display(Image(filename=relative_media_path))
     else:
         raise ValueError(f"Unsupported file extension: {file_extension}")
