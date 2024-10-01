@@ -123,3 +123,13 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: 0.5em; /* Adjust this value as needed to reduce the gap */
     font-family: 'Gudea', sans-serif;
 }
+
+.hide.above-input summary {
+    color: black;
+}
+
+.cell_output.docutils.container img {
+    display: block; /* Makes sure the image is treated as a block element */
+    margin-left: auto;
+    margin-right: auto;
+}
