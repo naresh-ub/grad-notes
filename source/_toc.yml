@@ -15,7 +15,7 @@ parts:
       - file: start/new-file
       - file: start/publish
       - file: start/example-book
-  - file: tutorials/references
+    - file: mth-531/chap-III_1/intro
 # chapters:
 # - file: website-todo
 # parts:

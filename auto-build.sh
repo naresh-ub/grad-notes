@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # Folder to monitor
-FOLDER_TO_WATCH="/Users/naresh/Downloads/phd/books/source"
+FOLDER_TO_WATCH="/Users/naresh/Downloads/phd/grad-notes/source"
 
 # Python script to run when a change is detected
-PYTHON_FILE="/Users/naresh/Downloads/phd/books/build.py"
+PYTHON_FILE="/Users/naresh/Downloads/phd/grad-notes/build.py"
 
 # File or folder to ignore (you can add more if needed)
-IGNORE_PATTERN="/Users/naresh/Downloads/phd/books/source/_build"
+IGNORE_PATTERN="/Users/naresh/Downloads/phd/grad-notes/source/_build"
 
 # Continuously monitor the folder, running the Python script once per detected change
 while true; do
