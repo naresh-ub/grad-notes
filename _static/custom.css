@@ -133,3 +133,10 @@ h1, h2, h3, h4, h5, h6 {
     margin-left: auto;
     margin-right: auto;
 }
+
+.custom-text {
+    font-size: 25px; /* Adjust font size as needed */
+    /* font-weight: bold; */
+    font-family: 'Gudea', sans-serif;
+    /* margin-top: 1em; Adjust margin as needed */
+}
