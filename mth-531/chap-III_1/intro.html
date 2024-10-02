@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=0f030372" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=0e5cf8fa" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -363,7 +363,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -379,6 +381,14 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convergence-of-a-sequence">Convergence of a sequence</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -399,7 +409,8 @@ document.write(`
 </div>
 <p>Depending on the properties that are satisfied by elements in a sequence there are some special kind of sequences (also called progressions).</p>
 <p>For example, an <strong><em>arithmetic progression</em></strong> is a sequence where the difference of two successive terms is constant i.e., <span class="math notranslate nohighlight">\(s_2 - s_1 = s_3 - s_2 = s_k - s_{k-1} \enspace \forall k \in [2, n]\)</span>. Similarly, a <strong><em>geometric progression</em></strong> is a sequence where the quotient of two successive terms is a constant. An example sequence with common quotient <span class="math notranslate nohighlight">\(q\)</span> between successive terms is given by <span class="math notranslate nohighlight">\(\{ q^0, q^1, ..., q^{n-1}\}\)</span>.</p>
-<p class="custom-text">Convergence of a sequence</p>
+<section id="convergence-of-a-sequence">
+<h2>Convergence of a sequence<a class="headerlink" href="#convergence-of-a-sequence" title="Link to this heading">#</a></h2>
 <p>If a <em>sequence <span class="math notranslate nohighlight">\(\{s_n\}\)</span></em> <a class="reference internal" href="#equation-seq-def">(1)</a> approaches <strong>arbitrarily close</strong> to a number <span class="math notranslate nohighlight">\(s\)</span> for <span class="math notranslate nohighlight">\(n\)</span> <strong>large enough</strong>, we call this number <span class="math notranslate nohighlight">\(s\)</span> to be the <em>limit</em> of <span class="math notranslate nohighlight">\(\{s_n\}\)</span>. More details:</p>
 <ul class="simple">
 <li><p>“arbitrarily close” here means, closer than any positive number <span class="math notranslate nohighlight">\(\varepsilon\)</span>, meaning <span class="math notranslate nohighlight">\(|s_n - s| &lt; \varepsilon\)</span>. Here <span class="math notranslate nohighlight">\(| \cdot |\)</span> refers to the <em>absolute value</em> and ensures <span class="math notranslate nohighlight">\(s_n\)</span> is close to the <em>limit</em> <span class="math notranslate nohighlight">\(s\)</span> in the positive <em>and</em> negative direction.</p></li>
@@ -412,12 +423,7 @@ document.write(`
 <div class="math notranslate nohighlight" id="equation-conv-def">
 <span class="eqno">(2)<a class="headerlink" href="#equation-conv-def" title="Link to this equation">#</a></span>\[\forall \varepsilon &gt; 0 \enspace \exists N \geq 1 \enspace \forall n \geq N \enspace |s_n - s| &lt; \varepsilon\]</div>
 </div>
-<div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -438,16 +444,24 @@ document.write(`
 <span class="c1"># Vectorize the sequence function to apply it to each value in n_values</span>
 <span class="n">vectorized_sequence</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">sequence</span><span class="p">)</span>
 <span class="n">sequence_values</span> <span class="o">=</span> <span class="n">vectorized_sequence</span><span class="p">(</span><span class="n">n_values</span><span class="p">)</span>
-<span class="n">approx_limit</span> <span class="o">=</span> <span class="n">sequence</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
 
+<span class="c1"># Simple check for convergence</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">epsilon</span> <span class="o">=</span> <span class="mf">0.0001</span>
+<span class="n">approx_limit</span> <span class="o">=</span> <span class="n">sequence</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">approx_limit</span> <span class="o">-</span> <span class="n">sequence</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">1000</span><span class="p">))</span> <span class="o">&lt;</span> <span class="n">epsilon</span><span class="p">:</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;$S_n$&quot;</span> <span class="o">+</span> <span class="s2">&quot; convergences to S = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">approx_limit</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;$S_n$&quot;</span> <span class="o">+</span> <span class="s2">&quot; does not converge&quot;</span>
+    
 <span class="c1"># Plot the sequence values</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">n_values</span><span class="p">,</span> <span class="n">sequence_values</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$S_n$&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">n_values</span><span class="p">,</span> <span class="n">approx_limit</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n_values</span><span class="o">.</span><span class="n">shape</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$S$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">n_values</span><span class="p">,</span> <span class="n">approx_limit</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n_values</span><span class="o">.</span><span class="n">shape</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$S_n$&#39;</span><span class="o">+</span> <span class="s2">&quot; at n = 10^5&quot;</span><span class="p">)</span>
 
 <span class="c1"># Add labels and title</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;n&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$S_n$&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Sequence Values for Different n&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 
 <span class="c1"># Show the plot</span>
@@ -455,7 +469,6 @@ document.write(`
 </pre></div>
 </div>
 </div>
-</details>
 </div>
 <details class="toggle-details" open>
   <summary class="toggle-details__summary"> ⧨ Toggle plt GIFs</summary>
@@ -463,7 +476,498 @@ document.write(`
     <img src="../../_static/media/sequence_convergence.gif" style="width: 45%; max-width: 100%; margin-right: 10px;"/> 
     <img src="../../_static/media/sequence_divergence.gif" style="width: 45%; max-width: 100%;"/>
   </div>
-</details></section>
+</details><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">tikz</span> -p listofitems -f svg
+\centering
+\usetikzlibrary{positioning}
+\tikzstyle{mynode}=[thick,draw=blue,fill=blue!20,circle,minimum size=22]
+\begin{tikzpicture}[x=1.5cm,y=1.5cm] % Adjusting x and y scales for better fitting
+  \readlist\Nnod{4,5,5,5,3} % number of nodes per layer
+  \foreachitem \N \in \Nnod{ % loop over layers
+    \foreach \i [evaluate={\x=\Ncnt; \y=\N/2-\i+0.5; \prev=int(\Ncnt-1);}] in {1,...,\N}{ % loop over nodes
+      \node[mynode] (N\Ncnt-\i) at (\x,\y) {};
+      \ifnum\Ncnt&gt;1 % connect to previous layer
+        \foreach \j in {1,...,\Nnod[\prev]}{ % loop over nodes in previous layer
+          \draw[thick] (N\prev-\j) -- (N\Ncnt-\i); % connect arrows directly
+        }
+      \fi
+    }
+  }
+\end{tikzpicture}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">preamble</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">    \definecolor</span><span class="si">{myblue}{RGB}</span><span class="s1">{66,164,233}</span>
+<span class="s1">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">tikz</span> -i -t=pgfplots -nt -S=docs/assets/quadratic -r --dpi=150
+\begin{tikzpicture} [nodes in empty cells,
+      nodes={minimum width=0.5cm, minimum height=0.5cm},
+      row sep=-\pgflinewidth, column sep=-\pgflinewidth]
+      border/.style={draw}
+    
+      \matrix(vector)[matrix of nodes,
+          row 1/.style={nodes={draw=none, minimum width=0.3cm}},
+          nodes={draw}]
+      {
+          \tiny{0} &amp; \tiny{1} &amp; \tiny{2} &amp; \tiny{3}\\
+          $a_{0}$ &amp; $a_{1}$ &amp; $a_{2}$ &amp; $a_{3}$\\
+      };
+\end{tikzpicture}
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="nn">----&gt; 1 get_ipython().run_cell_magic(&#39;tikz&#39;, &#39;-i -t=pgfplots -nt -S=docs/assets/quadratic -r --dpi=150&#39;, &#39;\\begin{tikzpicture} [nodes</span> in <span class="ni">empty cells,\n      nodes={minimum width=0.5cm, minimum height=0.5cm},\n      row sep=-\\pgflinewidth, column sep=-\\pgflinewidth]\n      border/.style={draw}\n    \n      \\matrix</span><span class="nt">(vector)[matrix of nodes,\n          row 1/.style={nodes={draw=none, minimum width=0.3cm}},\n          nodes={draw}]\n      {\n          \\tiny{0} &amp; \\tiny{1} &amp; \\tiny{2} &amp; \\tiny{3}\\\\\n          $a_{0}$ &amp; $a_{1}$ &amp; $a_{2}$ &amp; $a_{3}$\\\\\n      };\n\\end{tikzpicture}\n&#39;)</span>
+
+<span class="nn">File ~/miniconda3/envs/doc_env/lib/python3.10/site-packages/IPython/core/interactiveshell.py:2541,</span> in <span class="ni">InteractiveShell.run_cell_magic</span><span class="nt">(self, magic_name, line, cell)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2539</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">builtin_trap</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">2540</span>     <span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="n">magic_arg_s</span><span class="p">,</span> <span class="n">cell</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">2541</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2543</span> <span class="c1"># The code below prevents the output from being displayed</span>
+<span class="g g-Whitespace">   </span><span class="mi">2544</span> <span class="c1"># when using magics with decorator @output_can_be_silenced</span>
+<span class="g g-Whitespace">   </span><span class="mi">2545</span> <span class="c1"># when the last Python token in the expression is a &#39;;&#39;.</span>
+<span class="g g-Whitespace">   </span><span class="mi">2546</span> <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">magic</span><span class="o">.</span><span class="n">MAGIC_OUTPUT_CAN_BE_SILENCED</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+
+<span class="nn">File ~/miniconda3/envs/doc_env/lib/python3.10/site-packages/jupyter_tikz/jupyter_tikz.py:746,</span> in <span class="ni">TikZMagics.tikz</span><span class="nt">(self, line, cell, local_ns)</span>
+<span class="g g-Whitespace">    </span><span class="mi">744</span> <span class="n">image</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="g g-Whitespace">    </span><span class="mi">745</span> <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="s2">&quot;no_compile&quot;</span><span class="p">]:</span>
+<span class="ne">--&gt; </span><span class="mi">746</span>     <span class="n">image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tex_obj</span><span class="o">.</span><span class="n">run_latex</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">747</span>         <span class="n">tex_program</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="s2">&quot;tex_program&quot;</span><span class="p">],</span>
+<span class="g g-Whitespace">    </span><span class="mi">748</span>         <span class="n">tex_args</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="s2">&quot;tex_args&quot;</span><span class="p">],</span>
+<span class="g g-Whitespace">    </span><span class="mi">749</span>         <span class="n">rasterize</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="s2">&quot;rasterize&quot;</span><span class="p">],</span>
+<span class="g g-Whitespace">    </span><span class="mi">750</span>         <span class="n">full_err</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="s2">&quot;full_err&quot;</span><span class="p">],</span>
+<span class="g g-Whitespace">    </span><span class="mi">751</span>         <span class="n">keep_temp</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="s2">&quot;keep_temp&quot;</span><span class="p">],</span>
+<span class="g g-Whitespace">    </span><span class="mi">752</span>         <span class="n">save_tikz</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="s2">&quot;save_tikz&quot;</span><span class="p">],</span>
+<span class="g g-Whitespace">    </span><span class="mi">753</span>         <span class="n">save_tex</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="s2">&quot;save_tex&quot;</span><span class="p">],</span>
+<span class="g g-Whitespace">    </span><span class="mi">754</span>         <span class="n">save_pdf</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="s2">&quot;save_pdf&quot;</span><span class="p">],</span>
+<span class="g g-Whitespace">    </span><span class="mi">755</span>         <span class="n">save_image</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="s2">&quot;save_image&quot;</span><span class="p">],</span>
+<span class="g g-Whitespace">    </span><span class="mi">756</span>         <span class="n">dpi</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="s2">&quot;dpi&quot;</span><span class="p">],</span>
+<span class="g g-Whitespace">    </span><span class="mi">757</span>         <span class="n">grayscale</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="s2">&quot;gray&quot;</span><span class="p">],</span>
+<span class="g g-Whitespace">    </span><span class="mi">758</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">759</span>     <span class="k">if</span> <span class="n">image</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">760</span>         <span class="k">return</span> <span class="kc">None</span>
+
+<span class="nn">File ~/miniconda3/envs/doc_env/lib/python3.10/site-packages/jupyter_tikz/jupyter_tikz.py:194,</span> in <span class="ni">TexDocument.run_latex</span><span class="nt">(self, tex_program, tex_args, rasterize, full_err, keep_temp, save_image, dpi, grayscale, save_tex, save_tikz, save_pdf)</span>
+<span class="g g-Whitespace">    </span><span class="mi">191</span>     <span class="n">tex_command</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot; </span><span class="si">{</span><span class="n">tex_args</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">192</span> <span class="n">tex_command</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot; </span><span class="si">{</span><span class="n">tex_path</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">194</span> <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run_command</span><span class="p">(</span><span class="n">tex_command</span><span class="p">,</span> <span class="n">full_err</span><span class="o">=</span><span class="n">full_err</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">195</span> <span class="k">if</span> <span class="n">res</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">196</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_clearup_latex_garbage</span><span class="p">(</span><span class="n">keep_temp</span><span class="p">)</span>
+
+<span class="nn">File ~/miniconda3/envs/doc_env/lib/python3.10/site-packages/jupyter_tikz/jupyter_tikz.py:111,</span> in <span class="ni">TexDocument._run_command</span><span class="nt">(self, command, full_err, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">109</span> <span class="k">def</span> <span class="nf">_run_command</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">full_err</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">111</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">112</span>         <span class="n">command</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">113</span>         <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">114</span>         <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">115</span>         <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">116</span>         <span class="n">check</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">117</span>         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">118</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">119</span>     <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">returncode</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">120</span>         <span class="n">err_msg</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">stderr</span> <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">stderr</span> <span class="k">else</span> <span class="n">result</span><span class="o">.</span><span class="n">stdout</span>
+
+<span class="nn">File ~/miniconda3/envs/doc_env/lib/python3.10/subprocess.py:503,</span> in <span class="ni">run</span><span class="nt">(input, capture_output, timeout, check, *popenargs, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">501</span> <span class="k">with</span> <span class="n">Popen</span><span class="p">(</span><span class="o">*</span><span class="n">popenargs</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="k">as</span> <span class="n">process</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">502</span>     <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">503</span>         <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">process</span><span class="o">.</span><span class="n">communicate</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">504</span>     <span class="k">except</span> <span class="n">TimeoutExpired</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">505</span>         <span class="n">process</span><span class="o">.</span><span class="n">kill</span><span class="p">()</span>
+
+<span class="nn">File ~/miniconda3/envs/doc_env/lib/python3.10/subprocess.py:1149,</span> in <span class="ni">Popen.communicate</span><span class="nt">(self, input, timeout)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1146</span>     <span class="n">endtime</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="g g-Whitespace">   </span><span class="mi">1148</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1149</span>     <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_communicate</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">endtime</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1150</span> <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1151</span>     <span class="c1"># https://bugs.python.org/issue25942</span>
+<span class="g g-Whitespace">   </span><span class="mi">1152</span>     <span class="c1"># See the detailed comment in .wait().</span>
+<span class="g g-Whitespace">   </span><span class="mi">1153</span>     <span class="k">if</span> <span class="n">timeout</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="nn">File ~/miniconda3/envs/doc_env/lib/python3.10/subprocess.py:2000,</span> in <span class="ni">Popen._communicate</span><span class="nt">(self, input, endtime, orig_timeout)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1993</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_check_timeout</span><span class="p">(</span><span class="n">endtime</span><span class="p">,</span> <span class="n">orig_timeout</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1994</span>                         <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1995</span>                         <span class="n">skip_check_and_raise</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1996</span>     <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>  <span class="c1"># Impossible :)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1997</span>         <span class="s1">&#39;_check_timeout(..., skip_check_and_raise=True) &#39;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1998</span>         <span class="s1">&#39;failed to raise TimeoutExpired.&#39;</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">2000</span> <span class="n">ready</span> <span class="o">=</span> <span class="n">selector</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2001</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_timeout</span><span class="p">(</span><span class="n">endtime</span><span class="p">,</span> <span class="n">orig_timeout</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2003</span> <span class="c1"># XXX Rewrite these to use non-blocking I/O on the file</span>
+<span class="g g-Whitespace">   </span><span class="mi">2004</span> <span class="c1"># objects; they are no longer using C stdio!</span>
+
+<span class="nn">File ~/miniconda3/envs/doc_env/lib/python3.10/selectors.py:416,</span> in <span class="ni">_PollLikeSelector.select</span><span class="nt">(self, timeout)</span>
+<span class="g g-Whitespace">    </span><span class="mi">414</span> <span class="n">ready</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="g g-Whitespace">    </span><span class="mi">415</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">416</span>     <span class="n">fd_event_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_selector</span><span class="o">.</span><span class="n">poll</span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">417</span> <span class="k">except</span> <span class="ne">InterruptedError</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">418</span>     <span class="k">return</span> <span class="n">ready</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">tikz</span> -as=f -r -d=200
+\documentclass[tikz,border=10pt]{standalone}
+\usetikzlibrary{matrix,positioning,quotes,fit}
+\usetikzlibrary{backgrounds}
+\tikzset{standard/.style={matrix of nodes,left delimiter={(},right delimiter={)},inner sep=0pt,nodes={inner sep=0.3em}}}
+\tikzset{submatrix/.style = {rectangle, rounded corners,
+  fill=yellow, draw, inner sep=0pt}}
+\begin{document}
+\begin{tikzpicture}[every node/.append style={font=\sffamily}]
+  \matrix[standard] (m)  {
+       1 &amp; 2 &amp; 3 \\
+       4 &amp; 5 &amp; 6 \\
+       7 &amp; 8 &amp; 9 \\};
+  \matrix[standard,right = 3cm of m] (n) {
+       1 &amp; 4 &amp; 7 \\
+       2 &amp; 5 &amp; 8 \\
+       3 &amp; 6 &amp; 9 \\};
+  \draw[-&gt;,shorten &lt;=1em,shorten &gt;=1em,thick] (m.east) to[&quot;Transpose&quot;] (n);
+ \begin{scope}[on background layer]
+   \node (m1) [submatrix, fit=(m-2-2) (m-3-3)] {};
+   \node (n1) [submatrix, fit=(n-2-2) (n-3-3)] {};
+ \end{scope}
+ \draw [-&gt;] (m1.south east) to[bend right=20] (n1.south west);
+\end{tikzpicture}
+\end{document}
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/d905bd28648931a5e677849c63da51a79e47e369b950470ff81dc0b47b3f8ba8.png" src="../../_images/d905bd28648931a5e677849c63da51a79e47e369b950470ff81dc0b47b3f8ba8.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">tikz</span> -as=full-document
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+\begin{document}
+
+    \begin{tikzpicture}
+     \begin{axis}[
+          xlabel=$x$,
+          ylabel=$y$,
+          domain=-2:4
+     ]
+     \addplot[color=red] {sin(deg(x))};
+     \addplot[color=blue] {cos(deg(x)};
+     \legend{$\sin(x)$,$\cos(x)$}
+     \end{axis}
+
+\end{tikzpicture}
+\end{document}
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/6fe11ada2e28a5b3023321ff903fe5ce69f7a6fb0cdd514d2fec4ea42626a9f9.svg" src="../../_images/6fe11ada2e28a5b3023321ff903fe5ce69f7a6fb0cdd514d2fec4ea42626a9f9.svg" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">tikz</span> -as=full-document
+\documentclass[border=3pt,tikz]{standalone}
+\usepackage{tikz}
+\usepackage{listofitems} % for \readlist to create arrays
+\tikzstyle{mynode}=[thick,draw=blue,fill=blue!20,circle,minimum size=22]
+\begin{document}
+\begin{tikzpicture}[x=2.2cm,y=1.4cm]
+  \readlist\Nnod{4,5,5,5,3} % number of nodes per layer
+  % \Nnodlen = length of \Nnod (i.e. total number of layers)
+  % \Nnod[1] = element (number of nodes) at index 1
+  \foreachitem \N \in \Nnod{ % loop over layers
+    % \N     = current element in this iteration (i.e. number of nodes for this layer)
+    % \Ncnt  = index of current layer in this iteration
+    \foreach \i [evaluate={\x=\Ncnt; \y=\N/2-\i+0.5; \prev=int(\Ncnt-1);}] in {1,...,\N}{ % loop over nodes
+      \node[mynode] (N\Ncnt-\i) at (\x,\y) {};
+      \ifnum\Ncnt&gt;1 % connect to previous layer
+        \foreach \j in {1,...,\Nnod[\prev]}{ % loop over nodes in previous layer
+          \draw[thick] (N\prev-\j) -- (N\Ncnt-\i); % connect arrows directly
+        }
+      \fi % else: nothing to connect first layer
+    }
+  }
+\end{tikzpicture}
+\end{document}
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/f5b08f5fa1324194333ea98436d92f0dd36f12e09db7b57da7ea2211a2634d46.svg" src="../../_images/f5b08f5fa1324194333ea98436d92f0dd36f12e09db7b57da7ea2211a2634d46.svg" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">tikz</span> -as=f
+\documentclass[tikz]{standalone}
+\usepackage{neuralnetwork}
+
+\newcommand{\xin}[2]{$x_#2$}
+\newcommand{\xout}[2]{$\hat x_#2$}
+
+\begin{document}
+\begin{neuralnetwork}[height=8]
+  \tikzstyle{input neuron}=[neuron, fill=orange!70];
+  \tikzstyle{output neuron}=[neuron, fill=blue!60!black, text=white];
+
+  \inputlayer[count=8, bias=false, title=Input Layer, text=\xin]
+
+  \hiddenlayer[count=5, bias=false]
+  \linklayers
+
+  \hiddenlayer[count=3, bias=false, title=Latent\\Representation]
+  \linklayers
+
+  \hiddenlayer[count=5, bias=false]
+  \linklayers
+
+  \outputlayer[count=8, title=Output Layer, text=\xout]
+  \linklayers
+
+\end{neuralnetwork}
+\end{document}
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/1bbe6ff92aa3e779e9ded8c118c22490a881f375e474afc8a314711441a31f42.svg" src="../../_images/1bbe6ff92aa3e779e9ded8c118c22490a881f375e474afc8a314711441a31f42.svg" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">node_names</span> <span class="o">=</span> <span class="s2">&quot;ABCDEF&quot;</span>
+<span class="n">nodes</span> <span class="o">=</span> <span class="p">{</span><span class="n">s</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="mi">365</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">node_names</span><span class="p">)</span> <span class="o">*</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">node_names</span><span class="p">)}</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span>
+<span class="n">nodes</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;A&#39;: 0, &#39;B&#39;: 60, &#39;C&#39;: 121, &#39;D&#39;: 182, &#39;E&#39;: 243, &#39;F&#39;: 304}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/8d0833c43c241c7fd300f581640c378c11a5f60914ed042fe4ac4d177f5f3f2a.svg" src="../../_images/8d0833c43c241c7fd300f581640c378c11a5f60914ed042fe4ac4d177f5f3f2a.svg" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">tikz</span> -as=f
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+\begin{document}
+
+    \begin{tikzpicture}
+	\begin{axis}[
+		height=9cm,
+		width=9cm,
+		grid=major,
+	]
+		
+	\addplot {-x^5 - 242};
+	\addlegendentry{model}
+
+	\addplot coordinates {
+		(-4.77778,2027.60977)
+		(-3.55556,347.84069)
+		(-2.33333,22.58953)
+		(-1.11111,-493.50066)
+		(0.11111,46.66082)
+		(1.33333,-205.56286)
+		(2.55556,-341.40638)
+		(3.77778,-1169.24780)
+		(5.00000,-3269.56775)
+	};
+	\addlegendentry{estimate}
+	\end{axis}
+\end{tikzpicture}
+\end{document}
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/45f47c7c87d16a6da9d87ed56132c27dcd6e0d84ce50390eac7f49d37f746a96.svg" src="../../_images/45f47c7c87d16a6da9d87ed56132c27dcd6e0d84ce50390eac7f49d37f746a96.svg" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">tikz</span> -as=f
+\documentclass[tikz]{standalone}
+
+\usetikzlibrary{matrix, positioning}
+
+\begin{document}
+\begin{tikzpicture}[
+    2d-arr/.style={matrix of nodes, row sep=-\pgflinewidth, column sep=-\pgflinewidth, nodes={draw}}
+  ]
+
+  \matrix (mtr) [2d-arr] {
+  0 &amp; 1 &amp; 1 &amp; |[fill=orange!30]| 1 &amp; |[fill=orange!30]| 0 &amp; |[fill=orange!30]| 0 &amp; 0\\
+  0 &amp; 0 &amp; 1 &amp; |[fill=orange!30]| 1 &amp; |[fill=orange!30]| 1 &amp; |[fill=orange!30]| 0 &amp; 0\\
+  0 &amp; 0 &amp; 0 &amp; |[fill=orange!30]| 1 &amp; |[fill=orange!30]| 1 &amp; |[fill=orange!30]| 1 &amp; 0\\
+  0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 0\\
+  0 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 0 &amp; 0\\
+  0 &amp; 1 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0\\
+  1 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0\\
+  };
+
+  \node[below=of mtr-5-4] {$\mathbf I$};
+
+  \node[right=0.2em of mtr] (str) {$*$};
+
+  \matrix (K) [2d-arr, right=0.2em of str, nodes={draw, fill=teal!30}] {
+    1 &amp; 0 &amp; 1 \\
+    0 &amp; 1 &amp; 0 \\
+    1 &amp; 0 &amp; 1 \\
+  };
+  \node[below=of K-3-2] {$\mathbf K$};
+
+  \node[right=0.2em of K] (eq) {$=$};
+
+  \matrix (ret) [2d-arr, right=0.2em of eq] {
+  1 &amp; 4 &amp; 3 &amp; |[fill=blue!80!black!30]| 4 &amp; 1\\
+  1 &amp; 2 &amp; 4 &amp; 3 &amp; 3\\
+  1 &amp; 2 &amp; 3 &amp; 4 &amp; 1\\
+  1 &amp; 3 &amp; 3 &amp; 1 &amp; 1\\
+  3 &amp; 3 &amp; 1 &amp; 1 &amp; 0\\
+  };
+  \node[below=of ret-4-3] {$\mathbf{I * K}$};
+
+  \draw[dashed, teal] (mtr-1-6.north east) -- (K-1-1.north west);
+  \draw[dashed, teal] (mtr-3-6.south east) -- (K-3-1.south west);
+
+  \draw[dashed, blue!80!black] (K-1-3.north east) -- (ret-1-4.north west);
+  \draw[dashed, blue!80!black] (K-3-3.south east) -- (ret-1-4.south west);
+
+  \foreach \i in {1,2,3} {
+      \foreach \j in {4,5,6} {
+          \node[font=\tiny, scale=0.6, shift={(-1.2ex,-2ex)}] at (mtr-\i-\j) {$\times \pgfmathparse{int(mod(\i+\j,2))}\pgfmathresult$};
+        }
+    }
+
+\end{tikzpicture}
+\end{document}
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/fb9456f46712ab04008983a485cb53814ed8cd08d9946285c727fe16a1fe2504.svg" src="../../_images/fb9456f46712ab04008983a485cb53814ed8cd08d9946285c727fe16a1fe2504.svg" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">tikz</span> -as=f -r -d=300
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+\begin{document}
+
+\definecolor{offwhite}{HTML}{F2EDED}
+\tikzset{
+    &gt; = stealth,
+    every node/.append style = {
+        text = black
+    },
+    every path/.append style = {
+        arrows = -&gt;,
+        draw = black,
+        fill = offwhite
+    },
+    hidden/.style = {
+        draw = black,
+        shape = circle,
+        inner sep = 1pt
+    }
+}
+\tikz{
+    \node (a) at (0,0) {$A$};
+    \node (s) at (0,2) {$S$};
+    \node (x) at (1,1) {$X$};
+    \node (y) at (2.5,1) {$Y$};
+    \node[hidden] (u) at (1.5,2) {$U$};
+    \path (a) edge (s);
+    \path (a) edge (x);
+    \path (a) edge (y);
+    \path (s) edge (x);
+    \path (s) edge (y);
+    \path (x) edge (y);
+    \path (u) edge (s);
+    \path (u) edge (y);
+}
+\end{document}
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/16d1b7b5d7f2525bf8e1ca4ce2dd432831100dbe96eb69165c701e22810032c8.png" src="../../_images/16d1b7b5d7f2525bf8e1ca4ce2dd432831100dbe96eb69165c701e22810032c8.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">tikz</span> -as=f
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\begin{document}
+\pgfmathdeclarefunction{gauss}{2}{%
+  \pgfmathparse{1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2))}%
+}
+
+\begin{tikzpicture}
+\begin{axis}[
+  no markers, domain=0:10, samples=100,
+  axis lines*=left, xlabel=$x$, ylabel=$y$,
+  every axis y label/.style={at=(current axis.above origin),anchor=south},
+  every axis x label/.style={at=(current axis.right of origin),anchor=west},
+  height=5cm, width=12cm,
+  xtick={4,6.5}, ytick=\empty,
+  enlargelimits=false, clip=false, axis on top,
+  grid = major
+  ]
+  \addplot [fill=cyan!20, draw=none, domain=0:5.96] {gauss(6.5,1)} \closedcycle;
+  \addplot [very thick,cyan!50!black] {gauss(4,1)};
+  \addplot [very thick,cyan!50!black] {gauss(6.5,1)};
+  \draw [yshift=-0.6cm, latex-latex](axis cs:4,0) -- node [fill=white] {$1.96\sigma$} (axis cs:5.96,0);
+\end{axis}
+
+\end{tikzpicture}
+\end{document}
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/70c0f5addcbf9c23c5624c0bb1b9e54880f768cc44e047dcbb05d52e614a56a3.svg" src="../../_images/70c0f5addcbf9c23c5624c0bb1b9e54880f768cc44e047dcbb05d52e614a56a3.svg" />
+</div>
+</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -510,6 +1014,21 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convergence-of-a-sequence">Convergence of a sequence</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
