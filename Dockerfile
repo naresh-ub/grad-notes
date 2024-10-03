@@ -16,12 +16,6 @@ USER root
 # Install Jupyter Notebook without using cache
 RUN pip install notebook
 
-# Copy requirements.txt file
-COPY requirements.txt /tmp/
-
-# Display the contents of requirements.txt
-RUN cat /tmp/requirements.txt
-
 # Install dependencies from requirements.txt file without using cache
 RUN pip install -r /tmp/requirements.txt
 
@@ -30,6 +24,12 @@ COPY --from=poppler /usr/bin/pdftocairo /usr/bin/
 
 # Verify pdftocairo in the final stage
 RUN pdftocairo -v
+
+# Copy requirements.txt file
+COPY requirements.txt /tmp/
+
+# Display the contents of requirements.txt
+RUN cat /tmp/requirements.txt
 
 # Copy the project files
 COPY . /grad-notes
