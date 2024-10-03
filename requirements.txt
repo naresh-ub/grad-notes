@@ -6,4 +6,3 @@ pandas
 plotly
 scikit-learn
 seaborn
-jupyter-tikz
