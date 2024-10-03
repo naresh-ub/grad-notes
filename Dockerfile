@@ -4,7 +4,7 @@ FROM manimcommunity/manim:v0.18.1
 USER root
 
 # Install Jupyter Notebook without using cache
-RUN pip install notebook
+RUN pip install --no-cache-dir notebook
 
 # Install required system dependencies
 RUN apt-get update && apt-get install -y \
@@ -18,7 +18,8 @@ RUN apt-get update && apt-get install -y \
     texlive-luatex \
     texlive-xetex \
     wget \
-    unzip
+    unzip && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Verify pdftocairo installation
 RUN pdftocairo -v
@@ -47,8 +48,8 @@ COPY requirements.txt /tmp/
 # Display the contents of requirements.txt
 RUN cat /tmp/requirements.txt
 
-# Install Python dependencies from requirements.txt
-RUN pip install -r /tmp/requirements.txt
+# Install Python dependencies from requirements.txt without using cache
+RUN pip install --no-cache-dir -r /tmp/requirements.txt
 
 # Copy the project files
 COPY . /grad-notes
@@ -56,9 +57,11 @@ COPY . /grad-notes
 # Set working directory
 WORKDIR /grad-notes/source
 
-# Set user back to the default non-root user for running notebooks
-ARG NB_USER=manimuser
-USER ${NB_USER}
+# Ensure permissions are correctly set for non-root user to access the files
+RUN chown -R manimuser:manimuser /grad-notes
 
-# Copy the project files with the correct ownership
-COPY --chown=manimuser:manimuser . /grad-notes
+# Set user back to the default non-root user for running notebooks
+USER manimuser
+
+# Set entrypoint to start Jupyter Notebook
+ENTRYPOINT ["jupyter", "notebook", "--ip=0.0.0.0", "--no-browser", "--allow-root"]
