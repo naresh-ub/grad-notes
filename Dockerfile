@@ -49,34 +49,15 @@
 # ARG NB_USER=manimuser
 # USER ${NB_USER}
 
-# Start from the Manim base image
+# # Ensure the ownership of the files is correct for the non-root user
+# RUN chown -R ${NB_USER}:${NB_USER} /grad-notes
+
 FROM manimcommunity/manim:v0.18.1
 
 # Use root for installation processes
 USER root
 
-# Install required system dependencies for adding Python 3.11
-RUN apt-get update && apt-get install -y \
-    software-properties-common \
-    && add-apt-repository ppa:deadsnakes/ppa \
-    && apt-get update && apt-get install -y \
-    python3.11 \
-    python3.11-venv \
-    python3.11-dev \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
-
-# Set Python 3.11 as the default Python version
-RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 1 && \
-    update-alternatives --install /usr/bin/python python /usr/bin/python3.11 1
-
-# Verify the Python version
-RUN python3 --version
-
-# Install pip for Python 3.11
-RUN curl -sS https://bootstrap.pypa.io/get-pip.py | python3.11
-
-# Install Jupyter Notebook
+# Install Jupyter Notebook without using cache
 RUN pip install notebook
 
 # Copy requirements.txt file
@@ -85,18 +66,18 @@ COPY requirements.txt /tmp/
 # Display the contents of requirements.txt
 RUN cat /tmp/requirements.txt
 
-# Install dependencies from requirements.txt file
+# Install dependencies from requirements.txt file without using cache
 RUN pip install -r /tmp/requirements.txt
 
-# Copy project files
 COPY . /grad-notes
 
-# Set the working directory
 WORKDIR /grad-notes/source
 
-# Set non-root user
 ARG NB_USER=manimuser
+
 USER ${NB_USER}
 
-# Ensure proper file ownership
 COPY --chown=manimuser:manimuser . /grad-notes
+# COPY --chown=manimuser:manimuser . /manim
+
+
