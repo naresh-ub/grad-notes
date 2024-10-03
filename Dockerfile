@@ -60,6 +60,13 @@ USER root
 # Install Jupyter Notebook without using cache
 RUN pip install notebook
 
+# Popper installation for pdftocairo
+RUN apt-get update && apt-get install -y \
+    poppler-utils \
+    libpoppler-cpp-dev
+
+RUN pdftocairo -v
+
 # Copy requirements.txt file
 COPY requirements.txt /tmp/
 
@@ -79,5 +86,3 @@ USER ${NB_USER}
 
 COPY --chown=manimuser:manimuser . /grad-notes
 # COPY --chown=manimuser:manimuser . /manim
-
-
