@@ -29,11 +29,14 @@ RUN mkdir -p /manim/.local/share/texmf/tex/latex/pgfplots && \
     unzip -q /tmp/pgfplots.zip -d /manim/.local/share/texmf/tex/latex/pgfplots && \
     mktexlsr
 
+# Update LaTeX's file database to recognize the new package
+RUN mktexlsr /manim/.local/share/texmf
+
 # Verify that pgfplots is installed and available
 RUN kpsewhich pgfplots.sty
 
 # Set TEXINPUTS environment variable to ensure LaTeX finds packages in custom directories
-ENV TEXINPUTS=".:/manim/.local/share/texmf/tex/latex//::"
+ENV TEXINPUTS=".:/manim/.local/share/texmf/tex/latex//:"
 
 # Copy requirements.txt file for additional Python dependencies
 COPY requirements.txt /tmp/
