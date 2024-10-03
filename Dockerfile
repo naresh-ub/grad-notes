@@ -1,37 +1,30 @@
-# First stage: Use the Alpine image to install poppler-utils and pdftocairo
-FROM alpine:latest AS poppler
-
-# Install poppler and poppler-utils in Alpine
-RUN apk --no-cache add poppler poppler-utils
-
-# Verify pdftocairo installation
-RUN pdftocairo -v
-
-# Second stage: Use the Manim base image
+# Start from the Manim base image
 FROM manimcommunity/manim:v0.18.0
 
 # Use root for installation processes
 USER root
 
-# Install poppler utilities (from first stage)
-COPY --from=poppler /usr/bin/pdftocairo /usr/bin/
+# Install Jupyter Notebook without using cache
+RUN pip install notebook
 
-# Verify pdftocairo in the final stage to confirm it's correctly installed
+# Install poppler-utils and libpoppler in the Manim (Ubuntu-based) image
+RUN apt-get update && apt-get install -y \
+    poppler-utils \
+    libpoppler-cpp-dev
+
+# Verify pdftocairo is installed correctly
 RUN pdftocairo -v
 
-# Copy requirements.txt file early to avoid errors when installing dependencies
+# Copy requirements.txt file
 COPY requirements.txt /tmp/
 
-# Display the contents of requirements.txt for debugging
+# Display the contents of requirements.txt
 RUN cat /tmp/requirements.txt
 
 # Install dependencies from requirements.txt file
 RUN pip install -r /tmp/requirements.txt
 
-# Install Jupyter Notebook without using cache
-RUN pip install notebook
-
-# Copy the project files after the dependencies are installed
+# Copy the project files
 COPY . /grad-notes
 
 # Set the working directory
@@ -43,7 +36,6 @@ USER ${NB_USER}
 
 # Ensure the ownership of the files is correct for the non-root user
 COPY --chown=manimuser:manimuser . /grad-notes
-
 
 # FROM manimcommunity/manim:v0.18.0
 
