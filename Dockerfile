@@ -12,10 +12,10 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install Poetry
-RUN curl -sSL https://install.python-poetry.org | python3 - && \
-    ln -s /root/.local/bin/poetry /usr/local/bin/poetry
+RUN curl -sSL https://install.python-poetry.org | python3 -
+RUN ln -s /root/.local/bin/poetry /usr/local/bin/poetry
 
-# Ensure Poetry is available in the PATH
+# Ensure Poetry is available in the PATH for all users
 ENV PATH="/root/.local/bin:$PATH"
 
 # Install Jupyter Notebook and other pip-based dependencies
@@ -34,7 +34,7 @@ WORKDIR /grad-notes
 COPY pyproject.toml poetry.lock* /grad-notes/
 
 # Install only jupyter-tikz using Poetry
-RUN poetry install --no-root
+RUN /usr/local/bin/poetry install --no-root
 
 # Copy the rest of the project files
 COPY . /grad-notes
