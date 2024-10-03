@@ -23,6 +23,9 @@ RUN apt-get update && apt-get install -y \
 # Verify pdftocairo installation
 RUN pdftocairo -v
 
+# Set the correct TEXMFHOME environment variable
+ENV TEXMFHOME="/manim/.local/share/texmf"
+
 # Download and manually install pgfplots LaTeX package
 RUN mkdir -p /manim/.local/share/texmf/tex/latex/pgfplots && \
     wget -q https://mirrors.ctan.org/graphics/pgf/contrib/pgfplots.zip -O /tmp/pgfplots.zip && \
