@@ -33,14 +33,17 @@ html:
 
 sphinx:
   config:
-    html_js_files:
-      - https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js
+    html_js_files: [
+      https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js, 
+      _static/js/video_autoplay.js]
     suppress_warnings: ["mystnb.unknown_mime_type"]
     extra_extensions:
       - sphinx_togglebutton
       - sphinx_inline_tabs
       - sphinx_sitemap
       - sphinx.ext.mathjax
+      - sphinxcontrib.tikz
+      - myst_nb
 
 
 parse:

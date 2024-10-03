@@ -42,7 +42,7 @@ def display_video_or_image(file_path, is_video):
         if video_url:
             display(HTML(f"""
             <div style="width: 100%;">
-              <video width="100%" controls>
+              <video width="100%" controls playsinline>
                   <source src="{video_url}" type="video/mp4">
                   Your browser does not support the video tag.
               </video>
@@ -163,7 +163,7 @@ def display_file(file_path):
     if file_extension == '.mp4':
         display(HTML(f"""
         <div style="width: 100%;">
-          <video width="100%" controls>
+          <video width="100%" controls playsinline>
               <source src="{relative_media_path}" type="video/mp4">
               Your browser does not support the video tag.
           </video>

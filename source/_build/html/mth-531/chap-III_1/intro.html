@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=ef7e387c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=0e5cf8fa" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -62,6 +62,8 @@
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'mth-531/chap-III_1/intro';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/_static/js/video_autoplay.js"></script>
+    <script src="../../_static/js/video_autoplay.js?v=6207bf42"></script>
     <link rel="icon" href="../../_static/grad-notes-dark.gif"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -363,7 +365,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -379,6 +383,15 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convergence-of-a-sequence">Convergence of a sequence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experimental">Experimental</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -390,57 +403,145 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="chapter-iii-1-foundations-of-classical-analysis">
 <h1>Chapter III.1 Foundations of Classical Analysis<a class="headerlink" href="#chapter-iii-1-foundations-of-classical-analysis" title="Link to this heading">#</a></h1>
-<div class="tip admonition">
-<p class="admonition-title">Def 1: What is a sequence?</p>
-<p>In simple terms a sequence can be defined as a collection of numbers. Each number is ordered and indexed (starting from 0 or 1). <span class="math notranslate nohighlight">\(\{s_n\}\)</span> is the mathematical notation to represent a sequence.</p>
+<div class="seealso admonition">
+<p class="admonition-title">What is a sequence?</p>
+<p>In simple terms a sequence can be defined as a collection of numbers. Sequences are ordered and indexed (starting from 0 or 1). <span class="math notranslate nohighlight">\(\{s_n\}\)</span> is the mathematical notation to represent a sequence.</p>
 <p>For example, a sequence of <span class="math notranslate nohighlight">\(n\)</span> numbers can be defined as below:</p>
 <div class="math notranslate nohighlight" id="equation-seq-def">
 <span class="eqno">(1)<a class="headerlink" href="#equation-seq-def" title="Link to this equation">#</a></span>\[\{s_n\} = \{s_1, s_2, s_3, ..., s_n \}\]</div>
 </div>
 <p>Depending on the properties that are satisfied by elements in a sequence there are some special kind of sequences (also called progressions).</p>
-<p>For example, an <strong><em>arithmetic progression</em></strong> is a sequence where the difference of two successive terms is constant i.e., <span class="math notranslate nohighlight">\(s_2 - s_1 = s_3 - s_2 = s_k - s_{k-1} \enspace \forall \enspace k \in [2, n]\)</span>. Similarly, a <strong><em>geometric progression</em></strong> is a sequence where the quotient of two successive terms is a constant. An example sequence with common quotient <span class="math notranslate nohighlight">\(q\)</span> between successive terms is given by <span class="math notranslate nohighlight">\(\{ q^0, q^1, ..., q^{n-1}\}\)</span>.</p>
-<div class="tip admonition">
-<p class="admonition-title">Def 2: Convergence of a sequence</p>
-<p>what</p>
+<p>For example, an <strong><em>arithmetic progression</em></strong> is a sequence where the difference of two successive terms is constant i.e., <span class="math notranslate nohighlight">\(s_2 - s_1 = s_3 - s_2 = s_k - s_{k-1} \enspace \forall k \in [2, n]\)</span>. Similarly, a <strong><em>geometric progression</em></strong> is a sequence where the quotient of two successive terms is a constant. An example sequence with common quotient <span class="math notranslate nohighlight">\(q\)</span> between successive terms is given by <span class="math notranslate nohighlight">\(\{ q^0, q^1, ..., q^{n-1}\}\)</span>.</p>
+<section id="convergence-of-a-sequence">
+<h2>Convergence of a sequence<a class="headerlink" href="#convergence-of-a-sequence" title="Link to this heading">#</a></h2>
+<p>If a <em>sequence <span class="math notranslate nohighlight">\(\{s_n\}\)</span></em> <a class="reference internal" href="#equation-seq-def">(1)</a> approaches <strong>arbitrarily close</strong> to a number <span class="math notranslate nohighlight">\(s\)</span> for <span class="math notranslate nohighlight">\(n\)</span> <strong>large enough</strong>, we call this number <span class="math notranslate nohighlight">\(s\)</span> to be the <em>limit</em> of <span class="math notranslate nohighlight">\(\{s_n\}\)</span>. More details:</p>
+<ul class="simple">
+<li><p>“arbitrarily close” here means, closer than any positive number <span class="math notranslate nohighlight">\(\varepsilon\)</span>, meaning <span class="math notranslate nohighlight">\(|s_n - s| &lt; \varepsilon\)</span>. Here <span class="math notranslate nohighlight">\(| \cdot |\)</span> refers to the <em>absolute value</em> and ensures <span class="math notranslate nohighlight">\(s_n\)</span> is close to the <em>limit</em> <span class="math notranslate nohighlight">\(s\)</span> in the positive <em>and</em> negative direction.</p></li>
+<li><p>“for <span class="math notranslate nohighlight">\(n\)</span> large enough” means that there must be an <span class="math notranslate nohighlight">\(N\)</span> where the condition <span class="math notranslate nohighlight">\(|s_n - s| &lt; \varepsilon\)</span> is true for all <span class="math notranslate nohighlight">\(n \geq N\)</span>.</p></li>
+</ul>
+<p>Symbols <span class="math notranslate nohighlight">\(\forall\)</span> (“for all”) and <span class="math notranslate nohighlight">\(\exists\)</span> (“there exists”) are used for compactness. We have our first definition of the chapter.</p>
+<div class="tip admonition" id="def-1-1">
+<p class="admonition-title">Def 1.1: Convergence of a sequence</p>
+<p>We say a sequence <span class="math notranslate nohighlight">\(s_n\)</span> <a class="reference internal" href="#equation-seq-def">(1)</a> coverges if there exists a number <span class="math notranslate nohighlight">\(s\)</span> such that</p>
+<div class="math notranslate nohighlight" id="equation-conv-def">
+<span class="eqno">(2)<a class="headerlink" href="#equation-conv-def" title="Link to this equation">#</a></span>\[\forall \varepsilon &gt; 0 \enspace \exists N \geq 1 \enspace \forall n \geq N \enspace |s_n - s| &lt; \varepsilon\]</div>
 </div>
-<p>A sequence <span class="math notranslate nohighlight">\(\{s_n\}\)</span> <a class="reference internal" href="#equation-seq-def">(1)</a> is said to convergence to a <span class="math notranslate nohighlight">\(s\)</span></p>
-<div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 
 <span class="k">def</span> <span class="nf">sequence</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="mi">4</span><span class="o">/</span><span class="n">n</span><span class="p">)</span><span class="o">**</span><span class="n">n</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">sign</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">((</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">))</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="n">sign</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">i</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
 
-<span class="c1"># Generate values for n from 1 to 50</span>
-<span class="n">n_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
-<span class="n">sequence_values</span> <span class="o">=</span> <span class="n">sequence</span><span class="p">(</span><span class="n">n_values</span><span class="p">)</span>
+<span class="c1"># Generate values for n from 1 to 1000</span>
+<span class="n">n_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">n_values</span><span class="p">,</span> <span class="n">sequence_values</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$S_n = (1+4/n)^n$&#39;</span><span class="p">)</span>
+<span class="c1"># Vectorize the sequence function to apply it to each value in n_values</span>
+<span class="n">vectorized_sequence</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">sequence</span><span class="p">)</span>
+<span class="n">sequence_values</span> <span class="o">=</span> <span class="n">vectorized_sequence</span><span class="p">(</span><span class="n">n_values</span><span class="p">)</span>
 
-<span class="c1"># Add a dashed line at y = e^4 to show the convergence point</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">n_values</span><span class="p">,</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">n_values</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Convergence to $e^4$&#39;</span><span class="p">)</span>
+<span class="c1"># Simple check for convergence</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">epsilon</span> <span class="o">=</span> <span class="mf">0.0001</span>
+<span class="n">approx_limit</span> <span class="o">=</span> <span class="n">sequence</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">approx_limit</span> <span class="o">-</span> <span class="n">sequence</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">1000</span><span class="p">))</span> <span class="o">&lt;</span> <span class="n">epsilon</span><span class="p">:</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;$S_n$&quot;</span> <span class="o">+</span> <span class="s2">&quot; convergences to S = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">approx_limit</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;$S_n$&quot;</span> <span class="o">+</span> <span class="s2">&quot; does not converge&quot;</span>
+    
+<span class="c1"># Plot the sequence values</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">n_values</span><span class="p">,</span> <span class="n">sequence_values</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$S_n$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">n_values</span><span class="p">,</span> <span class="n">approx_limit</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n_values</span><span class="o">.</span><span class="n">shape</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$S_n$&#39;</span><span class="o">+</span> <span class="s2">&quot; at n = 10^5&quot;</span><span class="p">)</span>
 
 <span class="c1"># Add labels and title</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Convergence of Sequence $S_n = (1+4/n)^n$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;n (Number of Terms)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$S_n$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
-
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;n&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$S_n$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Show the plot</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-</details>
+</div>
+<details class="toggle-details" open>
+  <summary class="toggle-details__summary"> ⧨ Toggle plt GIFs</summary>
+  <div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap;">
+    <img src="../../_static/media/sequence_convergence.gif" style="width: 45%; max-width: 100%; margin-right: 10px;"/> 
+    <img src="../../_static/media/sequence_divergence.gif" style="width: 45%; max-width: 100%;"/>
+  </div>
+</details></section>
+<section id="experimental">
+<h2>Experimental<a class="headerlink" href="#experimental" title="Link to this heading">#</a></h2>
+<p>Testing tikz and pgfplots for images within the site</p>
+<div class="cell tag_remove-input docutils container">
+</div>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../../_images/f0bc866a34553c31905ac5a22f54af742d9e399ac3f8f937b20165ff0fa5bfd9.png" src="../../_images/f0bc866a34553c31905ac5a22f54af742d9e399ac3f8f937b20165ff0fa5bfd9.png" />
+<img alt="../../_images/7c09ae3386a1e2dd76138c34cffe7eb522c5ac50eb4c9601604dbb86a9127625.svg" src="../../_images/7c09ae3386a1e2dd76138c34cffe7eb522c5ac50eb4c9601604dbb86a9127625.svg" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">tikz</span> -as=full-document
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+\begin{document}
+
+    \begin{tikzpicture}[scale=2]
+     \begin{axis}[
+          xlabel=$x$,
+          ylabel=$y$,
+          domain=-2:4
+     ]
+     \addplot[color=red] {sin(deg(x))};
+     \addplot[color=blue] {cos(deg(x)};
+     \legend{$\sin(x)$,$\cos(x)$}
+     \end{axis}
+
+\end{tikzpicture}
+\end{document}
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/7593974fab02e7b69d05c9c30849fe5b898360f788c9816f46177aabdea3d5ff.svg" src="../../_images/7593974fab02e7b69d05c9c30849fe5b898360f788c9816f46177aabdea3d5ff.svg" />
+</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/1bbe6ff92aa3e779e9ded8c118c22490a881f375e474afc8a314711441a31f42.svg" src="../../_images/1bbe6ff92aa3e779e9ded8c118c22490a881f375e474afc8a314711441a31f42.svg" />
+</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/8d0833c43c241c7fd300f581640c378c11a5f60914ed042fe4ac4d177f5f3f2a.svg" src="../../_images/8d0833c43c241c7fd300f581640c378c11a5f60914ed042fe4ac4d177f5f3f2a.svg" />
+</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/45f47c7c87d16a6da9d87ed56132c27dcd6e0d84ce50390eac7f49d37f746a96.svg" src="../../_images/45f47c7c87d16a6da9d87ed56132c27dcd6e0d84ce50390eac7f49d37f746a96.svg" />
+</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/a2adc1505e3c3588502198b1a487cacd8454fe5cf982e12f13d7f60110667a7c.png" src="../../_images/a2adc1505e3c3588502198b1a487cacd8454fe5cf982e12f13d7f60110667a7c.png" />
+</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/c71e653aae5fcbb5e1091c2920045065ab5396ba47e85ce0fc3ea5f9cd24d1c5.svg" src="../../_images/c71e653aae5fcbb5e1091c2920045065ab5396ba47e85ce0fc3ea5f9cd24d1c5.svg" />
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
@@ -450,54 +551,145 @@ document.write(`
 <span class="expanded">Hide code cell source</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="nn">go</span>
-<span class="kn">import</span> <span class="nn">urllib</span><span class="o">,</span> <span class="nn">json</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">tikz</span> -as=f
+\documentclass[tikz]{standalone}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\begin{document}
+\begin{tikzpicture}[scale=3]
+  \pgfplotsset{
+    every axis legend/.append style={
+      at={(0.5,0)},
+      anchor=south,legend columns=2
+    }}
+  \begin{axis}[unit vector ratio=1 1 1, axis lines=none, view={120}{30}]
+		
+  % Parte inferior del cilindro
+  % Min utiliza el menor valor entre el eje z sin parametrizar y la z parametrizada 
+  \addplot3[surf,z buffer=sort,samples=30,colormap/viridis,
+    variable=\u, variable y=\v,
+    domain=0:360, y domain=0:3]
+    ({cos(u)}, {sin(u)},{min(2-y,v)});		
 
-<span class="c1"># Fetch the data for the Sankey diagram</span>
-<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://raw.githubusercontent.com/plotly/plotly.js/master/test/image/mocks/sankey_energy.json&#39;</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+  % Plano parametrizado y+z=2
+  \addplot3[surf, z buffer=sort, samples=30,
+    variable=\u, variable y=\v,domain=-2:2, y domain=-2:2]({u}, {v},{2-v});
 
-<span class="c1"># Override gray link colors with &#39;source&#39; colors</span>
-<span class="n">opacity</span> <span class="o">=</span> <span class="mf">0.4</span>
-<span class="n">data</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;node&#39;</span><span class="p">][</span><span class="s1">&#39;color&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;rgba(255,0,255, 0.8)&#39;</span> <span class="k">if</span> <span class="n">color</span> <span class="o">==</span> <span class="s2">&quot;magenta&quot;</span> <span class="k">else</span> <span class="n">color</span> <span class="k">for</span> <span class="n">color</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;node&#39;</span><span class="p">][</span><span class="s1">&#39;color&#39;</span><span class="p">]]</span>
-<span class="n">data</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;link&#39;</span><span class="p">][</span><span class="s1">&#39;color&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;node&#39;</span><span class="p">][</span><span class="s1">&#39;color&#39;</span><span class="p">][</span><span class="n">src</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;0.8&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">opacity</span><span class="p">))</span>
-                                    <span class="k">for</span> <span class="n">src</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;link&#39;</span><span class="p">][</span><span class="s1">&#39;source&#39;</span><span class="p">]]</span>
+  % Interseccion parametrizada
+  \addplot3[color=black,smooth,samples=30,
+     variable=\u,domain=0:360,line width=1.25pt]
+    ({cos(u)}, {sin(u)},{2-sin(u)});
 
-<span class="c1"># Create the Sankey diagram</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">go</span><span class="o">.</span><span class="n">Sankey</span><span class="p">(</span>
-    <span class="n">valueformat</span> <span class="o">=</span> <span class="s2">&quot;.0f&quot;</span><span class="p">,</span>
-    <span class="n">valuesuffix</span> <span class="o">=</span> <span class="s2">&quot;TWh&quot;</span><span class="p">,</span>
-    <span class="n">node</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
-      <span class="n">pad</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span>
-      <span class="n">thickness</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span>
-      <span class="n">line</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">),</span>
-      <span class="n">label</span> <span class="o">=</span>  <span class="n">data</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;node&#39;</span><span class="p">][</span><span class="s1">&#39;label&#39;</span><span class="p">],</span>
-      <span class="n">color</span> <span class="o">=</span>  <span class="n">data</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;node&#39;</span><span class="p">][</span><span class="s1">&#39;color&#39;</span><span class="p">]</span>
-    <span class="p">),</span>
-    <span class="n">link</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
-      <span class="n">source</span> <span class="o">=</span>  <span class="n">data</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;link&#39;</span><span class="p">][</span><span class="s1">&#39;source&#39;</span><span class="p">],</span>
-      <span class="n">target</span> <span class="o">=</span>  <span class="n">data</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;link&#39;</span><span class="p">][</span><span class="s1">&#39;target&#39;</span><span class="p">],</span>
-      <span class="n">value</span> <span class="o">=</span>  <span class="n">data</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;link&#39;</span><span class="p">][</span><span class="s1">&#39;value&#39;</span><span class="p">],</span>
-      <span class="n">label</span> <span class="o">=</span>  <span class="n">data</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;link&#39;</span><span class="p">][</span><span class="s1">&#39;label&#39;</span><span class="p">],</span>
-      <span class="n">color</span> <span class="o">=</span>  <span class="n">data</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;link&#39;</span><span class="p">][</span><span class="s1">&#39;color&#39;</span><span class="p">]</span>
-<span class="p">))])</span>
-
-<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title_text</span><span class="o">=</span><span class="s2">&quot;Energy forecast for 2050&lt;br&gt;Source: Department of Energy &amp; Climate Change, Tom Counsell via &lt;a href=&#39;https://bost.ocks.org/mike/sankey/&#39;&gt;Mike Bostock&lt;/a&gt;&quot;</span><span class="p">,</span>
-                  <span class="n">font_size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-
-<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+  % Parte superior del cilindro. Utiliza max tal en la parte inferior
+  \addplot3[colormap/viridis,surf,z buffer=sort,samples=30,variable=\u, variable y=\v,
+    domain=0:360, y domain=0:4]({cos(u)}, {sin(u)},{max(2-y,v)});
+ 
+  % NOTA: el orden de dibujo de las superficies cambia si se aplica una vista diferente a la 120 30
+  \legend{$x^2+y^2=4$,$y+z=2$}
+  \end{axis}		
+\end{tikzpicture}
+\end{document}
 </pre></div>
 </div>
 </div>
 </details>
 <div class="cell_output docutils container">
+<img alt="../../_images/1a5173095ff1c2c6d74dac70f15c78c6cd113138455b87039e5074fa3464b715.svg" src="../../_images/1a5173095ff1c2c6d74dac70f15c78c6cd113138455b87039e5074fa3464b715.svg" />
 </div>
 </div>
-<details class="toggle-details" open>
-<summary class = "toggle-details__summary"> ⧨ Toggle plotly</summary>
-<iframe src = "https://plotly.com/~devula.phd/3/" width="100%" height=900px></iframe>
-</details></section>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">tikz</span> -as=f -r -d=130
+\documentclass{article}
+%
+% File name: cylinder-truncated-by-plane.tex
+% Description: 
+% A solid bounded by the following surfaces
+% z = 0
+% x^{2} + y^{2} = 4
+% x + y + z = 4
+% is generated. I.e., the intersection of a cylinder with a plane 
+% for z &gt;= 0.
+% 
+% Date of creation: April, 23rd, 2022.
+% Date of last modification: April, 23rd, 2022.
+% Author: Efraín Soto Apolinar.
+% https://www.aprendematematicas.org.mx/author/efrain-soto-apolinar/instructing-courses/
+% Terms of use:
+% According to TikZ.net
+% https://creativecommons.org/licenses/by-nc-sa/4.0/
+% 
+\usepackage{tikz}
+\usetikzlibrary{patterns}
+\usepackage{tikz-3dplot}
+\usetikzlibrary{math}
+\usepackage[active,tightpage]{preview}
+\PreviewEnvironment{tikzpicture}
+\setlength\PreviewBorder{1pt}
+%
+\begin{document}
+	%
+	\tdplotsetmaincoords{60}{110}
+	\begin{tikzpicture}[tdplot_main_coords,scale=0.65]
+		\tikzmath{function a(\x,\y) {return (4.0-\x-\y);};}
+		\pgfmathsetmacro{\final}{2.0*pi}
+		\pgfmathsetmacro{\ejez}{a(0,0)}
+		% The equation of the cyrcumference
+		\draw[white] (0,-2.5,0) -- (2.75,0,0) node[blue,midway,below,sloped] {\footnotesize$x^2 + y^2 = 4$};
+		% The region of integration: the circle of radius 2
+		\draw[thick,fill=yellow,opacity=0.5] plot[domain=0:6.2832,smooth,variable=\t] ({2.0*cos(\t r)},{2.0*sin(\t r)},{0.0});
+		%%% Coordinate axis
+		\draw[thick,-&gt;] (0,0,0) -- (3.5,0,0) node [below left] {\footnotesize$x$};
+		\draw[dashed] (0,0,0) -- (-3,0,0);
+		\draw[thick,-&gt;] (0,0,0) -- (0,3.5,0) node [right] {\footnotesize$y$};
+		\draw[dashed] (0,0,0) -- (0,-3,0);
+		\draw[thick] (0,0,0) -- (0,0,\ejez);% node [above] {\footnotesize$z$};	
+		% The plane: x + y + z = 4
+		\pgfmathsetmacro{\Az}{a(2.5,2.5)}
+		\pgfmathsetmacro{\Bz}{a(-2.5,2.5)}
+		\pgfmathsetmacro{\Cz}{a(-2.5,-2.5)}
+		\pgfmathsetmacro{\Dz}{a(2.5,-2.5)}
+		\coordinate (A) at (2.5,2.5,\Az);
+		\coordinate (B) at (-2.5,2.5,\Bz);
+		\coordinate (C) at (-2.5,-2.5,\Cz);
+		\coordinate (D) at (2.5,-2.5,\Dz);
+		% The cylinder
+		\foreach \angulo in {0,0.01,...,\final}{
+			\pgfmathparse{2.0*cos(\angulo r)}
+			\pgfmathsetmacro{\px}{\pgfmathresult}
+			\pgfmathparse{2.0*sin(\angulo r)}
+			\pgfmathsetmacro{\py}{\pgfmathresult}
+			\draw[cyan,opacity=0.5] (\px,\py,0) -- (\px,\py,4.0-\px-\py);
+		}
+		% The intersection of the cylinder and the plane (the trace)
+		\draw[blue,thick] plot[domain=0:6.2832,smooth,variable=\t] ({2.0*cos(\t r)},{2.0*sin(\t r)},{4.0-2.0*sin(\t r)-2.0*cos(\t r)});
+		% Circumference &amp; Ellipse bounding the solid.
+		\draw[blue,thick,opacity=0.5] plot[domain=0:6.2831853,smooth,variable=\t] ({2.0*cos(\t r)},{2.0*sin(\t r)},{4.0-2*sin(\t r)-2.0*cos(\t r)}); 
+		\draw[blue,thick,opacity=0.5] plot[domain=0:6.2831853,smooth,variable=\t] ({2.0*cos(\t r)},{2.0*sin(\t r)},{0.0}); 
+		% The plane
+		\draw[white] (C) -- (B) node[red,above,sloped,midway]{\footnotesize$x + y + z = 4$};
+		\draw[red,dash dot] (A) -- (B) -- (C)	 -- (D) -- (A);
+		\fill[pattern color=pink,pattern=north east lines] (A) -- (B) -- (C)	 -- (D) -- (A);
+		\fill[pink,opacity=0.5] plot[domain=0:6.2832,smooth,variable=\t] ({2.0*cos(\t r)},{2.0*sin(\t r)},{4.0-2.0*sin(\t r) - 2.0*cos(\t r)});
+		% z axis (last part)
+		\draw[thick,-&gt;] (0,0,\ejez) -- (0,0,8) node [above] {\footnotesize$z$};	
+	\end{tikzpicture}
+\end{document}
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../../_images/6b1a3cb7dde2deb8cd1d93314f8594800edb1393f24b3de4fb7af9386eec4960.png" src="../../_images/6b1a3cb7dde2deb8cd1d93314f8594800edb1393f24b3de4fb7af9386eec4960.png" />
+</div>
+</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -544,6 +736,22 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convergence-of-a-sequence">Convergence of a sequence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experimental">Experimental</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

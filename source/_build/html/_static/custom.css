@@ -119,8 +119,7 @@ pre, code {
     font-family: "Fira Code", monospace, !important;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    margin-top: 0.5em; /* Adjust this value as needed to reduce the gap */
+h1, h2, h3, h4, h6 {
     font-family: 'Gudea', sans-serif;
 }
 
@@ -133,3 +132,14 @@ h1, h2, h3, h4, h5, h6 {
     margin-left: auto;
     margin-right: auto;
 }
+
+/* Ensure no background color is applied to images */
+div.cell_output img {
+    background-color: white !important;
+}
+
+/* Ensure no brightness or contrast filter is applied to images in dark mode */
+html[data-theme="dark"] img:not(.only-dark, .dark-light) {
+    filter: none !important;
+}
+
