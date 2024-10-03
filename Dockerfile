@@ -8,10 +8,14 @@ RUN pip install notebook
 
 # Install poppler and poppler-utils using apt (for Ubuntu-based images)
 RUN apt-get update && apt-get install -y \
-    poppler-utils
+    poppler-utils \
+    libpoppler-cpp-dev
 
 # Clean up apt cache to reduce the image size
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Verify that pdftocairo is installed correctly
+RUN pdftocairo -v
 
 # Copy requirements.txt file
 COPY requirements.txt /tmp/
