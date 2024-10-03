@@ -11,14 +11,14 @@ RUN apt-get update && apt-get install -y \
     libpoppler-cpp-dev \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Set PATH to include Poetry before installation
-ENV PATH="/root/.local/bin:$PATH"
-
 # Install Poetry
 RUN curl -sSL https://install.python-poetry.org | python3 -
 
+# Ensure Poetry is available in the PATH
+ENV PATH="/manim/.local/bin:$PATH"
+
 # Verify Poetry installation
-RUN poetry --version
+RUN /manim/.local/bin/poetry --version
 
 # Install Jupyter Notebook and other pip-based dependencies
 COPY requirements.txt /tmp/
@@ -36,7 +36,7 @@ WORKDIR /grad-notes
 COPY pyproject.toml poetry.lock* /grad-notes/
 
 # Install dependencies using Poetry without installing the project itself
-RUN poetry install --no-root
+RUN /manim/.local/bin/poetry install --no-root
 
 # Copy the rest of the project files with correct ownership
 COPY . /grad-notes
