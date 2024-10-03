@@ -25,10 +25,8 @@ RUN cat /tmp/requirements.txt
 # Install dependencies from requirements.txt file without using cache
 RUN pip install -r /tmp/requirements.txt
 
-# Copy poppler-related binaries and libraries from the first stage (Alpine) to this stage
+# Copy only the required poppler binary (pdftocairo) from the first stage (Alpine) to this stage
 COPY --from=poppler /usr/bin/pdftocairo /usr/bin/
-COPY --from=poppler /usr/bin/poppler* /usr/bin/
-COPY --from=poppler /usr/lib/libpoppler* /usr/lib/
 
 # Verify pdftocairo in the final stage
 RUN pdftocairo -v
