@@ -16,7 +16,7 @@ def main():
 
     try:
         # Replace this with your actual website URL
-        website_url = 'https://your-username.github.io/your-repo/'
+        website_url = 'https://naresh-ub.github.io/grad-notes/'
         print(f'Navigating to {website_url}')
         driver.get(website_url)
 
