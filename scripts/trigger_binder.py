@@ -24,19 +24,16 @@ def main():
         # Wait for the page to load completely
         time.sleep(3)
 
-        # Click the rocket icon in the nav bar
-        print('Clicking the rocket icon')
-        rocket_icon = driver.find_element_by_css_selector('button.btn.dropdown-toggle[aria-label="Launch interactive content"]')
-        rocket_icon.click()
-
-        # Wait for any loading/transition
-        time.sleep(2)
-
-        # Execute the JavaScript function directly to trigger binder
+        # Execute the JavaScript function directly
         print('Executing the initThebeSBT function')
         driver.execute_script('initThebeSBT();')
 
-        # Wait for the binder build status
+        # Optionally wait for the process to finish
+        time.sleep(5)
+
+        print('Binder triggered successfully.')
+        
+                # Wait for the binder build status
         print("Waiting for the binder build to complete...")
 
         # Wait until the status changes to either "ready" or "failed"
