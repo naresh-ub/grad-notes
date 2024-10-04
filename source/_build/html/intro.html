@@ -65,9 +65,10 @@
     <script src="_static/_static/js/video_autoplay.js"></script>
     <script src="_static/js/video_autoplay.js?v=6207bf42"></script>
     <link rel="icon" href="_static/grad-notes-dark.gif"/>
+    <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="MTH 531 Intro to Real Variables 1" href="mth-531/intro.html" />
+    <link rel="next" title="About me and Website ToDos:" href="about.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -187,15 +188,18 @@
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">MTH 531 Analysis</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="mth-531/intro.html">MTH 531 Intro to Real Variables 1</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="mth-531/pre-reqs/intro.html">Pre-Requisites for CS students</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="about.html">About me and Website ToDos:</a></li>
 </ul>
-</details></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="mth-531/intro.html">Course: MTH 531 Intro to Real Variables 1</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="mth-531/pre-reqs.html">Pre-Requisites for CS students</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mth-531/chap-III_1/intro.html">Chapter III.1 Foundations of Classical Analysis</a></li>
 </ul>
 </details></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="tikz/intro.html">Learning TikZ</a></li>
 </ul>
 
     </div>
@@ -430,8 +434,8 @@ document.write(`
 <section id="visualizations">
 <h2>Visualizations<a class="headerlink" href="#visualizations" title="Link to this heading">#</a></h2>
 <p><a class="reference external" href="https://www.manim.community/">Manim</a> provides a wonderful way to create visualizations using python code. YouTube channels such as <a class="reference external" href="https://www.youtube.com/&#64;3blue1brown">3b1b’s videos</a>, <a class="reference external" href="https://www.youtube.com/&#64;vcubingx"><span class="math notranslate nohighlight">\(v^3(x)\)</span></a> use manim to create math animations.</p>
-<p>This website uses <a class="reference internal" href="#mybinder.org"><span class="xref myst">mybinder</span></a>, <a class="reference external" href="https://www.docker.com/">DockerHub</a>, and <a class="reference external" href="https://docs.github.com/en/actions/writing-workflows">GitHub workflows</a> to automatically build and generate manim visualizations within this website.</p>
-<p>For example, take a look at the code cell below.</p>
+<p>This website uses <a class="reference internal" href="#mybinder.org"><span class="xref myst">mybinder</span></a>, <a class="reference external" href="https://www.docker.com/">DockerHub</a>, and <a class="reference external" href="https://docs.github.com/en/actions/writing-workflows">GitHub workflows</a> to automatically build and generate manim visualizations within this website and <strong>the best part is that, the code is editable and provides you an interactive way to create your own animations.</strong></p>
+<p>For example, take a look at a manim code example cell below. <strong>Try to edit the code out, its fun!</strong> You can find manim documentation with more examples <a class="reference external" href="https://docs.manim.community/en/stable/examples.html">here</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">imports</span> <span class="kn">import</span> <span class="o">*</span>
@@ -466,7 +470,7 @@ document.write(`
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
 
-<span class="n">render_manim</span><span class="p">(</span><span class="n">MovingFrameBox</span><span class="p">,</span> <span class="s1">&#39;-qm&#39;</span><span class="p">,</span> <span class="s2">&quot;local&quot;</span><span class="p">)</span>
+<span class="n">render_manim</span><span class="p">(</span><span class="n">MovingFrameBox</span><span class="p">,</span> <span class="s1">&#39;-qm&#39;</span><span class="p">,</span> <span class="s2">&quot;browser&quot;</span><span class="p">)</span> <span class="c1"># use &quot;browser&quot; for online rendering</span>
 </pre></div>
 </div>
 </div>
@@ -480,11 +484,64 @@ document.write(`
         </div>
         </div></div>
 </div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">imports</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="k">class</span> <span class="nc">FollowingGraphCamera</span><span class="p">(</span><span class="n">MovingCameraScene</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">construct</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">camera</span><span class="o">.</span><span class="n">frame</span><span class="o">.</span><span class="n">save_state</span><span class="p">()</span>
+
+        <span class="c1"># create the axes and the curve</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">Axes</span><span class="p">(</span><span class="n">x_range</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="n">y_range</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+        <span class="n">graph</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="n">BLUE</span><span class="p">,</span> <span class="n">x_range</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">PI</span><span class="p">])</span>
+
+        <span class="c1"># create dots based on the graph</span>
+        <span class="n">moving_dot</span> <span class="o">=</span> <span class="n">Dot</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">i2gp</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">t_min</span><span class="p">,</span> <span class="n">graph</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="n">ORANGE</span><span class="p">)</span>
+        <span class="n">dot_1</span> <span class="o">=</span> <span class="n">Dot</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">i2gp</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">t_min</span><span class="p">,</span> <span class="n">graph</span><span class="p">))</span>
+        <span class="n">dot_2</span> <span class="o">=</span> <span class="n">Dot</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">i2gp</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">t_max</span><span class="p">,</span> <span class="n">graph</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">dot_1</span><span class="p">,</span> <span class="n">dot_2</span><span class="p">,</span> <span class="n">moving_dot</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">play</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">camera</span><span class="o">.</span><span class="n">frame</span><span class="o">.</span><span class="n">animate</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="n">moving_dot</span><span class="p">))</span>
+
+        <span class="k">def</span> <span class="nf">update_curve</span><span class="p">(</span><span class="n">mob</span><span class="p">):</span>
+            <span class="n">mob</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="n">moving_dot</span><span class="o">.</span><span class="n">get_center</span><span class="p">())</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">camera</span><span class="o">.</span><span class="n">frame</span><span class="o">.</span><span class="n">add_updater</span><span class="p">(</span><span class="n">update_curve</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">play</span><span class="p">(</span><span class="n">MoveAlongPath</span><span class="p">(</span><span class="n">moving_dot</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">rate_func</span><span class="o">=</span><span class="n">linear</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">camera</span><span class="o">.</span><span class="n">frame</span><span class="o">.</span><span class="n">remove_updater</span><span class="p">(</span><span class="n">update_curve</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">play</span><span class="p">(</span><span class="n">Restore</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">camera</span><span class="o">.</span><span class="n">frame</span><span class="p">))</span>
+
+<span class="n">render_manim</span><span class="p">(</span><span class="n">FollowingGraphCamera</span><span class="p">,</span> <span class="s1">&#39;-qm&#39;</span><span class="p">,</span> <span class="s2">&quot;browser&quot;</span><span class="p">)</span> <span class="c1"># use &quot;browser&quot; for online rendering</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <div style="width: 100%;">
+          <video width="100%" controls playsinline>
+              <source src="_static/media/FollowingGraphCamera_1728002005.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+          </video>
+        </div>
+        </div></div>
+</div>
 </section>
 <section id="extensions-and-much-more">
 <h2>Extensions and much more!<a class="headerlink" href="#extensions-and-much-more" title="Link to this heading">#</a></h2>
 <p>This website is built using <a class="reference external" href="https://www.sphinx-doc.org/en/master/">Sphinx</a>. All features in this website are listed here.</p>
 </section>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
 <div class="toctree-wrapper compound">
 </div>
 </section>
@@ -520,11 +577,11 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="right-next"
-       href="mth-531/intro.html"
+       href="about.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">MTH 531 Intro to Real Variables 1</p>
+        <p class="prev-next-title">About me and Website ToDos:</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

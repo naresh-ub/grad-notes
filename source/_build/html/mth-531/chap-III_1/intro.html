@@ -65,9 +65,11 @@
     <script src="../../_static/_static/js/video_autoplay.js"></script>
     <script src="../../_static/js/video_autoplay.js?v=6207bf42"></script>
     <link rel="icon" href="../../_static/grad-notes-dark.gif"/>
+    <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="prev" title="Pre-Requisites for CS students" href="../pre-reqs/intro.html" />
+    <link rel="next" title="Learning TikZ" href="../../tikz/intro.html" />
+    <link rel="prev" title="Pre-Requisites for CS students" href="../pre-reqs.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -185,15 +187,18 @@
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">MTH 531 Analysis</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">MTH 531 Intro to Real Variables 1</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2 has-children"><a class="reference internal" href="../pre-reqs/intro.html">Pre-Requisites for CS students</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About me and Website ToDos:</a></li>
 </ul>
-</details></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Course: MTH 531 Intro to Real Variables 1</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../pre-reqs.html">Pre-Requisites for CS students</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Chapter III.1 Foundations of Classical Analysis</a></li>
 </ul>
 </details></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../tikz/intro.html">Learning TikZ</a></li>
 </ul>
 
     </div>
@@ -389,7 +394,6 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convergence-of-a-sequence">Convergence of a sequence</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experimental">Experimental</a></li>
 </ul>
             </nav>
         </div>
@@ -480,215 +484,6 @@ document.write(`
     <img src="../../_static/media/sequence_divergence.gif" style="width: 45%; max-width: 100%;"/>
   </div>
 </details></section>
-<section id="experimental">
-<h2>Experimental<a class="headerlink" href="#experimental" title="Link to this heading">#</a></h2>
-<p>Testing tikz and pgfplots for images within the site</p>
-<div class="cell tag_remove-input docutils container">
-</div>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<img alt="../../_images/7c09ae3386a1e2dd76138c34cffe7eb522c5ac50eb4c9601604dbb86a9127625.svg" src="../../_images/7c09ae3386a1e2dd76138c34cffe7eb522c5ac50eb4c9601604dbb86a9127625.svg" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">tikz</span> -as=full-document
-\documentclass[tikz]{standalone}
-\usepackage{tikz}
-\usepackage{pgfplots}
-
-\begin{document}
-
-    \begin{tikzpicture}[scale=2]
-     \begin{axis}[
-          xlabel=$x$,
-          ylabel=$y$,
-          domain=-2:4
-     ]
-     \addplot[color=red] {sin(deg(x))};
-     \addplot[color=blue] {cos(deg(x)};
-     \legend{$\sin(x)$,$\cos(x)$}
-     \end{axis}
-
-\end{tikzpicture}
-\end{document}
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/7593974fab02e7b69d05c9c30849fe5b898360f788c9816f46177aabdea3d5ff.svg" src="../../_images/7593974fab02e7b69d05c9c30849fe5b898360f788c9816f46177aabdea3d5ff.svg" />
-</div>
-</div>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<img alt="../../_images/1bbe6ff92aa3e779e9ded8c118c22490a881f375e474afc8a314711441a31f42.svg" src="../../_images/1bbe6ff92aa3e779e9ded8c118c22490a881f375e474afc8a314711441a31f42.svg" />
-</div>
-</div>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<img alt="../../_images/8d0833c43c241c7fd300f581640c378c11a5f60914ed042fe4ac4d177f5f3f2a.svg" src="../../_images/8d0833c43c241c7fd300f581640c378c11a5f60914ed042fe4ac4d177f5f3f2a.svg" />
-</div>
-</div>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<img alt="../../_images/45f47c7c87d16a6da9d87ed56132c27dcd6e0d84ce50390eac7f49d37f746a96.svg" src="../../_images/45f47c7c87d16a6da9d87ed56132c27dcd6e0d84ce50390eac7f49d37f746a96.svg" />
-</div>
-</div>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<img alt="../../_images/a2adc1505e3c3588502198b1a487cacd8454fe5cf982e12f13d7f60110667a7c.png" src="../../_images/a2adc1505e3c3588502198b1a487cacd8454fe5cf982e12f13d7f60110667a7c.png" />
-</div>
-</div>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<img alt="../../_images/c71e653aae5fcbb5e1091c2920045065ab5396ba47e85ce0fc3ea5f9cd24d1c5.svg" src="../../_images/c71e653aae5fcbb5e1091c2920045065ab5396ba47e85ce0fc3ea5f9cd24d1c5.svg" />
-</div>
-</div>
-<div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">tikz</span> -as=f
-\documentclass[tikz]{standalone}
-\usepackage{pgfplots}
-\pgfplotsset{compat=1.18}
-\begin{document}
-\begin{tikzpicture}[scale=3]
-  \pgfplotsset{
-    every axis legend/.append style={
-      at={(0.5,0)},
-      anchor=south,legend columns=2
-    }}
-  \begin{axis}[unit vector ratio=1 1 1, axis lines=none, view={120}{30}]
-		
-  % Parte inferior del cilindro
-  % Min utiliza el menor valor entre el eje z sin parametrizar y la z parametrizada 
-  \addplot3[surf,z buffer=sort,samples=30,colormap/viridis,
-    variable=\u, variable y=\v,
-    domain=0:360, y domain=0:3]
-    ({cos(u)}, {sin(u)},{min(2-y,v)});		
-
-  % Plano parametrizado y+z=2
-  \addplot3[surf, z buffer=sort, samples=30,
-    variable=\u, variable y=\v,domain=-2:2, y domain=-2:2]({u}, {v},{2-v});
-
-  % Interseccion parametrizada
-  \addplot3[color=black,smooth,samples=30,
-     variable=\u,domain=0:360,line width=1.25pt]
-    ({cos(u)}, {sin(u)},{2-sin(u)});
-
-  % Parte superior del cilindro. Utiliza max tal en la parte inferior
-  \addplot3[colormap/viridis,surf,z buffer=sort,samples=30,variable=\u, variable y=\v,
-    domain=0:360, y domain=0:4]({cos(u)}, {sin(u)},{max(2-y,v)});
- 
-  % NOTA: el orden de dibujo de las superficies cambia si se aplica una vista diferente a la 120 30
-  \legend{$x^2+y^2=4$,$y+z=2$}
-  \end{axis}		
-\end{tikzpicture}
-\end{document}
-</pre></div>
-</div>
-</div>
-</details>
-<div class="cell_output docutils container">
-<img alt="../../_images/1a5173095ff1c2c6d74dac70f15c78c6cd113138455b87039e5074fa3464b715.svg" src="../../_images/1a5173095ff1c2c6d74dac70f15c78c6cd113138455b87039e5074fa3464b715.svg" />
-</div>
-</div>
-<div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">tikz</span> -as=f -r -d=130
-\documentclass{article}
-%
-% File name: cylinder-truncated-by-plane.tex
-% Description: 
-% A solid bounded by the following surfaces
-% z = 0
-% x^{2} + y^{2} = 4
-% x + y + z = 4
-% is generated. I.e., the intersection of a cylinder with a plane 
-% for z &gt;= 0.
-% 
-% Date of creation: April, 23rd, 2022.
-% Date of last modification: April, 23rd, 2022.
-% Author: Efraín Soto Apolinar.
-% https://www.aprendematematicas.org.mx/author/efrain-soto-apolinar/instructing-courses/
-% Terms of use:
-% According to TikZ.net
-% https://creativecommons.org/licenses/by-nc-sa/4.0/
-% 
-\usepackage{tikz}
-\usetikzlibrary{patterns}
-\usepackage{tikz-3dplot}
-\usetikzlibrary{math}
-\usepackage[active,tightpage]{preview}
-\PreviewEnvironment{tikzpicture}
-\setlength\PreviewBorder{1pt}
-%
-\begin{document}
-	%
-	\tdplotsetmaincoords{60}{110}
-	\begin{tikzpicture}[tdplot_main_coords,scale=0.65]
-		\tikzmath{function a(\x,\y) {return (4.0-\x-\y);};}
-		\pgfmathsetmacro{\final}{2.0*pi}
-		\pgfmathsetmacro{\ejez}{a(0,0)}
-		% The equation of the cyrcumference
-		\draw[white] (0,-2.5,0) -- (2.75,0,0) node[blue,midway,below,sloped] {\footnotesize$x^2 + y^2 = 4$};
-		% The region of integration: the circle of radius 2
-		\draw[thick,fill=yellow,opacity=0.5] plot[domain=0:6.2832,smooth,variable=\t] ({2.0*cos(\t r)},{2.0*sin(\t r)},{0.0});
-		%%% Coordinate axis
-		\draw[thick,-&gt;] (0,0,0) -- (3.5,0,0) node [below left] {\footnotesize$x$};
-		\draw[dashed] (0,0,0) -- (-3,0,0);
-		\draw[thick,-&gt;] (0,0,0) -- (0,3.5,0) node [right] {\footnotesize$y$};
-		\draw[dashed] (0,0,0) -- (0,-3,0);
-		\draw[thick] (0,0,0) -- (0,0,\ejez);% node [above] {\footnotesize$z$};	
-		% The plane: x + y + z = 4
-		\pgfmathsetmacro{\Az}{a(2.5,2.5)}
-		\pgfmathsetmacro{\Bz}{a(-2.5,2.5)}
-		\pgfmathsetmacro{\Cz}{a(-2.5,-2.5)}
-		\pgfmathsetmacro{\Dz}{a(2.5,-2.5)}
-		\coordinate (A) at (2.5,2.5,\Az);
-		\coordinate (B) at (-2.5,2.5,\Bz);
-		\coordinate (C) at (-2.5,-2.5,\Cz);
-		\coordinate (D) at (2.5,-2.5,\Dz);
-		% The cylinder
-		\foreach \angulo in {0,0.01,...,\final}{
-			\pgfmathparse{2.0*cos(\angulo r)}
-			\pgfmathsetmacro{\px}{\pgfmathresult}
-			\pgfmathparse{2.0*sin(\angulo r)}
-			\pgfmathsetmacro{\py}{\pgfmathresult}
-			\draw[cyan,opacity=0.5] (\px,\py,0) -- (\px,\py,4.0-\px-\py);
-		}
-		% The intersection of the cylinder and the plane (the trace)
-		\draw[blue,thick] plot[domain=0:6.2832,smooth,variable=\t] ({2.0*cos(\t r)},{2.0*sin(\t r)},{4.0-2.0*sin(\t r)-2.0*cos(\t r)});
-		% Circumference &amp; Ellipse bounding the solid.
-		\draw[blue,thick,opacity=0.5] plot[domain=0:6.2831853,smooth,variable=\t] ({2.0*cos(\t r)},{2.0*sin(\t r)},{4.0-2*sin(\t r)-2.0*cos(\t r)}); 
-		\draw[blue,thick,opacity=0.5] plot[domain=0:6.2831853,smooth,variable=\t] ({2.0*cos(\t r)},{2.0*sin(\t r)},{0.0}); 
-		% The plane
-		\draw[white] (C) -- (B) node[red,above,sloped,midway]{\footnotesize$x + y + z = 4$};
-		\draw[red,dash dot] (A) -- (B) -- (C)	 -- (D) -- (A);
-		\fill[pattern color=pink,pattern=north east lines] (A) -- (B) -- (C)	 -- (D) -- (A);
-		\fill[pink,opacity=0.5] plot[domain=0:6.2832,smooth,variable=\t] ({2.0*cos(\t r)},{2.0*sin(\t r)},{4.0-2.0*sin(\t r) - 2.0*cos(\t r)});
-		% z axis (last part)
-		\draw[thick,-&gt;] (0,0,\ejez) -- (0,0,8) node [above] {\footnotesize$z$};	
-	\end{tikzpicture}
-\end{document}
-</pre></div>
-</div>
-</div>
-</details>
-<div class="cell_output docutils container">
-<img alt="../../_images/6b1a3cb7dde2deb8cd1d93314f8594800edb1393f24b3de4fb7af9386eec4960.png" src="../../_images/6b1a3cb7dde2deb8cd1d93314f8594800edb1393f24b3de4fb7af9386eec4960.png" />
-</div>
-</div>
-</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -722,13 +517,22 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../pre-reqs/intro.html"
+       href="../pre-reqs.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">Pre-Requisites for CS students</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="../../tikz/intro.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Learning TikZ</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -747,7 +551,6 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convergence-of-a-sequence">Convergence of a sequence</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experimental">Experimental</a></li>
 </ul>
   </nav></div>
 
