@@ -33,7 +33,7 @@ def main():
 
         print('Binder triggered successfully.')
         
-                # Wait for the binder build status
+        # Wait for the binder build status
         print("Waiting for the binder build to complete...")
 
         # Wait until the status changes to either "ready" or "failed"
@@ -42,7 +42,7 @@ def main():
         )
         
         # Check the status after waiting
-        status = driver.find_element_by_class_name('status').text
+        status = driver.find_element(By.CLASS_NAME, 'status').text
         if status == "ready":
             print("Binder is ready.")
         elif status == "failed":
