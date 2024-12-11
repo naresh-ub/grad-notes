@@ -53,7 +53,8 @@ def display_video_or_image(file_path, is_video):
 
 def upload_file(file_path):
     with open(file_path, 'rb') as f:
-        response = requests.post('https://transfer.adttemp.com.br/', files={'file': f})
+        print("Uploading file to filetransfer.io...")
+        response = requests.post('https://filetransfer.io', files={'file': f})
         if response.status_code == 200:
             return response.text.strip()
     return None

@@ -29,7 +29,7 @@ html:
   use_issues_button: False
   use_repository_button: true
   extra_css: ["_static/custom.css"]
-  favicon: assets/website/grad-notes-dark.gif
+  favicon: assets/website/book-bookmark-solid.svg
 
 sphinx:
   config:

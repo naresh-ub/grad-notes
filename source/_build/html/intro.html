@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Grad Notes &#8212; Grad Notes</title>
+    <title>Why this Website? &#8212; Grad Notes</title>
   
   
   
@@ -16,17 +16,19 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-
-  
-  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
@@ -37,10 +39,11 @@
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="_static/custom.css?v=0e5cf8fa" />
   
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
 
     <script src="_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
@@ -64,13 +67,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/_static/js/video_autoplay.js"></script>
     <script src="_static/js/video_autoplay.js?v=6207bf42"></script>
-    <link rel="icon" href="_static/grad-notes-dark.gif"/>
+    <link rel="icon" href="_static/book-bookmark-solid.svg"/>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="About me and Website ToDos:" href="about.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -86,19 +90,8 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="search.html"
       method="get">
@@ -106,7 +99,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -114,8 +106,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -133,7 +125,8 @@
       
         
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -163,28 +156,24 @@
     
     
     <img src="_static/grad-notes-dark.gif" class="logo__image only-light" alt="Grad Notes - Home"/>
-    <script>document.write(`<img src="_static/grad-notes-dark.gif" class="logo__image only-dark" alt="Grad Notes - Home"/>`);</script>
+    <img src="_static/grad-notes-dark.gif" class="logo__image only-dark pst-js-only" alt="Grad Notes - Home"/>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1 current active">
                 <a class="reference internal" href="#">
-                    Grad Notes
+                    Why this Website?
                 </a>
             </li>
         </ul>
@@ -353,24 +342,16 @@
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
+</button>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -384,7 +365,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Grad Notes</h1>
+    <h1>Why this Website?</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -396,6 +377,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interactivity">Interactivity</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizations">Visualizations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interact-with-elements-in-visualizations">Interact with elements in visualizations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extensions-and-much-more">Extensions and much more!</a></li>
 </ul>
             </nav>
@@ -408,8 +390,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="grad-notes">
-<h1>Grad Notes<a class="headerlink" href="#grad-notes" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="why-this-website">
+<h1>Why this Website?<a class="headerlink" href="#why-this-website" title="Link to this heading">#</a></h1>
 <p>Hi there! I am Naresh Kumar, a PhD candidate (Chair’s Fellow) at the University at Buffalo, SUNY. This website is where I jot down notes for courses and concepts I’ve learned during my PhD. The motivation for creating this site is to provide an interactive environment to help others learn and visualize concepts in Computer Science.</p>
 <section id="interactivity">
 <h2>Interactivity<a class="headerlink" href="#interactivity" title="Link to this heading">#</a></h2>
@@ -418,7 +400,6 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This is an interactive code cell.&quot;</span><span class="p">)</span>
 
-<span class="c1"># Try running this cell by clicking the &#39;Run&#39; button.</span>
 <span class="c1"># Use Live Code option from the top of the page to get options to run.</span>
 </pre></div>
 </div>
@@ -436,54 +417,21 @@ document.write(`
 <p><a class="reference external" href="https://www.manim.community/">Manim</a> provides a wonderful way to create visualizations using python code. YouTube channels such as <a class="reference external" href="https://www.youtube.com/&#64;3blue1brown">3b1b’s videos</a>, <a class="reference external" href="https://www.youtube.com/&#64;vcubingx"><span class="math notranslate nohighlight">\(v^3(x)\)</span></a> use manim to create math animations.</p>
 <p>This website uses <a class="reference internal" href="#mybinder.org"><span class="xref myst">mybinder</span></a>, <a class="reference external" href="https://www.docker.com/">DockerHub</a>, and <a class="reference external" href="https://docs.github.com/en/actions/writing-workflows">GitHub workflows</a> to automatically build and generate manim visualizations within this website and <strong>the best part is that, the code is editable and provides you an interactive way to create your own animations.</strong></p>
 <p>For example, take a look at a manim code example cell below. <strong>Try to edit the code out, its fun!</strong> You can find manim documentation with more examples <a class="reference external" href="https://docs.manim.community/en/stable/examples.html">here</a>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">imports</span> <span class="kn">import</span> <span class="o">*</span>
-
-<span class="k">class</span> <span class="nc">MovingFrameBox</span><span class="p">(</span><span class="n">Scene</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">construct</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        
-        <span class="n">manim_text</span> <span class="o">=</span> <span class="n">Tex</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;This animation is made using&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">BLUE</span><span class="p">)</span>
-        <span class="n">mt2</span> <span class="o">=</span> <span class="n">Tex</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Manim&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">GOLD</span><span class="p">)</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">next_to</span><span class="p">(</span><span class="n">manim_text</span><span class="p">,</span> <span class="n">DOWN</span><span class="p">)</span>
-
-        <span class="n">text</span><span class="o">=</span><span class="n">MathTex</span><span class="p">(</span>
-            <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">frac</span><span class="si">{d}{dx}</span><span class="s2">f(x)g(x)=&quot;</span><span class="p">,</span><span class="s2">&quot;f(x)</span><span class="se">\\</span><span class="s2">frac</span><span class="si">{d}{dx}</span><span class="s2">g(x)&quot;</span><span class="p">,</span><span class="s2">&quot;+&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;g(x)</span><span class="se">\\</span><span class="s2">frac</span><span class="si">{d}{dx}</span><span class="s2">f(x)&quot;</span>
-        <span class="p">)</span>
-        
-        <span class="n">txt_group</span> <span class="o">=</span> <span class="n">VGroup</span><span class="p">(</span><span class="n">manim_text</span><span class="p">,</span> <span class="n">mt2</span><span class="p">)</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="n">ORIGIN</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">txt_group</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">play</span><span class="p">(</span><span class="n">Write</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
-        
-        <span class="bp">self</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
-        
-        <span class="bp">self</span><span class="o">.</span><span class="n">play</span><span class="p">(</span><span class="n">FadeOut</span><span class="p">(</span><span class="n">txt_group</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">play</span><span class="p">(</span><span class="n">Write</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
-        <span class="n">framebox1</span> <span class="o">=</span> <span class="n">SurroundingRectangle</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">buff</span> <span class="o">=</span> <span class="mf">.1</span><span class="p">)</span>
-        <span class="n">framebox2</span> <span class="o">=</span> <span class="n">SurroundingRectangle</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">buff</span> <span class="o">=</span> <span class="mf">.1</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">play</span><span class="p">(</span>
-            <span class="n">Create</span><span class="p">(</span><span class="n">framebox1</span><span class="p">),</span>
-        <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">play</span><span class="p">(</span>
-            <span class="n">ReplacementTransform</span><span class="p">(</span><span class="n">framebox1</span><span class="p">,</span><span class="n">framebox2</span><span class="p">),</span>
-        <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
-
-<span class="n">render_manim</span><span class="p">(</span><span class="n">MovingFrameBox</span><span class="p">,</span> <span class="s1">&#39;-qm&#39;</span><span class="p">,</span> <span class="s2">&quot;browser&quot;</span><span class="p">)</span> <span class="c1"># use &quot;browser&quot; for online rendering</span>
-</pre></div>
-</div>
-</div>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html">
         <div style="width: 100%;">
           <video width="100%" controls playsinline>
-              <source src="_static/media/MovingFrameBox_1727914076.mp4" type="video/mp4">
+              <source src="_static/media/MovingFrameBox_1733943599.mp4" type="video/mp4">
               Your browser does not support the video tag.
           </video>
         </div>
         </div></div>
 </div>
+</section>
+<section id="interact-with-elements-in-visualizations">
+<h2>Interact with elements in visualizations<a class="headerlink" href="#interact-with-elements-in-visualizations" title="Link to this heading">#</a></h2>
+<p>Some components of a visualization are interactive</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -524,14 +472,509 @@ document.write(`
 </div>
 </details>
 <div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Uploading file to filetransfer.io...
+</pre></div>
+</div>
 <div class="output text_html">
-        <div style="width: 100%;">
-          <video width="100%" controls playsinline>
-              <source src="_static/media/FollowingGraphCamera_1728002005.mp4" type="video/mp4">
-              Your browser does not support the video tag.
-          </video>
-        </div>
-        </div></div>
+            <div style="width: 100%;">
+              <video width="100%" controls playsinline>
+                  <source src="<!DOCTYPE html>
+<!--[if lt IE 8 ]>
+<html lang="cs" class="ie7 no-js"> <![endif]-->
+<!--[if lt IE 9 ]>
+<html lang="cs" class="ie8 no-js"> <![endif]-->
+<!--[if lt IE 10 ]>
+<html lang="cs" class="ie9 no-js"> <![endif]-->
+<!--[if (gt IE 10)|!(IE)]><!-->
+<html lang="cs"
+	  data-default-timezone="Etc/UTC" data-old-browser-url="/unsupported-browser?old=1" class="responsive-layout no-js prod">
+<!--<![endif]-->
+<head>
+
+	<meta charset="utf-8">
+	<!--[if IE]>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<![endif]-->
+	<meta name="author" content="">
+	<meta name="keywords" content="">
+	<meta name="app-version" content="NS4xNi4yMA==">
+
+
+	<meta name="og:description" content="Free transfer of up to 6 GB of photos, videos and documents. Send large files via email or a link to share. No registration, no ads, just simple file sharing!">
+
+	<meta name="description" content="Free transfer of up to 6 GB of photos, videos and documents. Send large files via email or a link to share. No registration, no ads, just simple file sharing!">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Fast &amp; Simple File Transfers - FileTransfer.io</title>
+
+
+	<link rel="apple-touch-icon" sizes="96x96" href="/img/favicon/96.png">
+
+	<link rel="apple-touch-icon" sizes="128x128" href="/img/favicon/128.png">
+
+	<link rel="apple-touch-icon" sizes="160x160" href="/img/favicon/160.png">
+
+	<link rel="apple-touch-icon" sizes="192x192" href="/img/favicon/192.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="96x96" href="/img/favicon/solid/96.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="128x128" href="/img/favicon/solid/128.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="160x160" href="/img/favicon/solid/160.png">
+
+	<link rel="apple-touch-icon-precomposed" sizes="192x192" href="/img/favicon/solid/192.png">
+
+	<link rel="icon" sizes="32x32" href="/img/favicon/32.png">
+	<link rel="icon" sizes="48x48" href="/img/favicon/48.png">
+	<link rel="icon" sizes="96x96" href="/img/favicon/96.png">
+	<link rel="icon" sizes="72x72" href="/img/favicon/72.png">
+	<link rel="icon" sizes="114x114" href="/img/favicon/114.png">
+	<link rel="icon" sizes="120x120" href="/img/favicon/120.png">
+	<link rel="icon" sizes="144x144" href="/img/favicon/144.png">
+	<link rel="icon" sizes="152x152" href="/img/favicon/152.png">
+	<link rel="icon" sizes="192x192" href="/img/favicon/192.png">
+	<link rel="mask-icon" href="/img/favicon/32.png" color="#86d122">
+	<link rel="mask-icon" sizes="16x16 32x32 48x48" href="/img/favicon/48.png" color="#86d122">
+	<link rel="mask-icon" sizes="64x64 96x96 160x160 192x192" href="/img/favicon/192.png" color="#86d122">
+	<meta name="application-name" content="FileTransfer.io">
+	<meta name="msapplication-TileColor" content="#000000">
+	<meta name="msapplication-TileImage" content="/img/favicon/144.png">
+	<meta name="msapplication-square70x70logo" content="/img/favicon/ms/tiny.png">
+	<meta name="msapplication-square150x150logo" content="/img/favicon/ms/square.png">
+	<meta name="msapplication-wide310x150logo" content="/img/favicon/ms/wide.png">
+	<meta name="msapplication-square310x310logo" content="/img/favicon/ms/large.png">
+			<meta property="og:title" content="Fast &amp; Simple File Transfers">
+		<meta property="og:site_name" content="FileTransfer.io">
+		<meta property="og:type" content="website">
+			<meta property="og:image" content="https://filetransfer.io/dist/filetransfer-social-en.389488efe49681ac059b218c21161d72.png">
+		<meta property="og:url" content="https://www.filetransfer.io/">
+		<meta property="fb:page_id" content="918008918320874">
+
+	<script src="/dist/newStyle.bundle.905c5b09db2e170f233f.js"></script>
+
+<script>
+    var MESSAGES = {};
+    MESSAGES.placeholders = {};
+    MESSAGES.alerts = {};
+    MESSAGES.labels = {};
+    MESSAGES.titles = {};
+    MESSAGES.time = {};
+    MESSAGES.time.shortcuts = {};
+
+    MESSAGES.placeholders.taginput = "Separate with a comma";
+    MESSAGES.placeholders.popupLoading = "Please wait…";
+    MESSAGES.placeholders.popupClose = "Close (ESC)";
+
+    MESSAGES.alerts.emailRequired = "Please enter an e-mail address in the format mail@example.com";
+    MESSAGES.alerts.emailAmbiguous = "Didn't you make a typo at the beginning of you e-mail address? If this really is the correct beginning of you e-mail, press enter.";
+    MESSAGES.alerts.uploadFailed = "We are sorry but the file upload couldn't be restored.";
+    MESSAGES.alerts.confirmUploadAbort = "Do you really want to interrupt the upload?";
+    MESSAGES.alerts.confirmFilelistLeave = "Do you really want to cancel the data package?";
+    MESSAGES.alerts.confirmShareLeave = "Are you sure you don't want to share your data package?";
+    MESSAGES.alerts.confirmShareAfterUploadAbort = "Are you sure you want to cancel sending your data package after the upload is finished?";
+    MESSAGES.alerts.uploadStale = "The data package can't be uploaded because the uploading was inactivated for too long. Please send your files in a new data package.";
+    MESSAGES.alerts.copyLink = "Copy link";
+
+    MESSAGES.labels.alreadyRecipient = "already received this data package";
+
+    MESSAGES.labels.copyManually = {};
+    MESSAGES.labels.copyManually.ctrl = "Press Ctrl-C";
+    MESSAGES.labels.copyManually.cmd = "Press ⌘-C";
+
+    MESSAGES.titles.filelist = "Choose files";
+    MESSAGES.titles.uploading = "% uploaded";
+    MESSAGES.titles.uploadComplete = "Data package uploaded";
+    MESSAGES.titles.uploadProblem = "Problem with upload";
+    MESSAGES.titles.errorOccurred = "An error occurred";
+    MESSAGES.titles.baseTitle = " - FileTransfer.io";
+
+    MESSAGES.time.shortcuts.days = "d";
+    MESSAGES.time.shortcuts.hours = "h";
+    MESSAGES.time.shortcuts.minutes = "m";
+    MESSAGES.time.shortcuts.seconds = "s";
+
+</script>
+
+</head>
+
+<body
+		data-bytes-per-kb="1024" data-sentry-url="https://6366128cd3ba4ffbba9e8e8735fXXXXX@sentry.ismeo.cz/41">
+<!-- Google Tag Manager -->
+<noscript>
+	<iframe src="//www.googletagmanager.com/ns.html?id=GTM-KTQGJJ"
+			height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+<script>
+	(function (w, d, s, l, i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window, document, 'script', 'dataLayer', 'GTM-KTQGJJ');
+	
+</script>
+<!-- End Google Tag Manager -->
+
+			<div class="blur">
+
+				<div class="container">
+
+					<div class="page">
+
+
+		<header class="header">
+
+		<a class="logo logo-en" title="Switch to the home page" href="/">
+			<strong>FileTransfer.io</strong>
+		</a>
+		<!-- .logo -->
+
+		<div id="snippet--header">
+
+
+
+
+			<a href="/login"
+			   class="account underline"
+			   data-authenticated="false">
+				<span class="icon-user circle"></span>
+				<span class="account-label underline-item xs-visible">
+					Log in
+				</span>
+			</a>
+			<!-- .account -->
+
+		<nav>
+			<div class="navigation-trigger md-invisible underline">
+				<span class="navigation-trigger-icon">
+					<span class="line-1">-</span>
+					<span class="line-2">-</span>
+					<span class="line-3">-</span>
+				</span>
+				<span class="navigation-trigger-text underline-item xs-visible">Menu</span>
+			</div>
+			<!-- .navigation-trigger -->
+
+
+
+			<ul class="navigation">
+
+				<li class="navigation-item navigation-item-active">
+				<a title="Send files"
+				   class="underline">
+					<span class="underline-item">Send files</span>
+				</a>
+				</li>
+
+				<li class="navigation-item">
+				<a title="Request files"
+				   class="underline" href="/file-requests/new">
+					<span class="underline-item">Request files</span>
+					<span class="badge small filled">beta</span>
+				</a>
+				</li>
+
+				<li class="navigation-item">
+				<a title="Sent"
+				   class="underline" href="/sent">
+					<span class="underline-item">Sent</span>
+				</a>
+				</li>
+			</ul>
+		</nav>
+
+		</div></header>
+
+		<hr>
+
+						<section class="content new-content">
+
+
+		<div id="snippet--flashes"></div>					<!-- .alert -->
+
+
+					<div data-name="upload-parameters" data-special="%7B%22uploadStartUrl%22%3A%22%2Fstart-upload%22%2C%22removeFileUrl%22%3A%22%2Fremove-file%2F__ownerCode________placeholder__%22%2C%22finishDeliveryUrl%22%3A%22%2Ffinish-delivery%2F__ownerCode________placeholder__%22%2C%22shareDeliveryUrl%22%3A%22%2Fshare%2F__ownerCode________placeholder__%22%2C%22chunkBytes%22%3A8388608%2C%22ownerDetail%22%3Afalse%2C%22uploadUrl%22%3A%22%22%2C%22uploadToken%22%3A%22%22%2C%22maxBytes%22%3A6442450944%2C%22ownerDetailLink%22%3A%22%22%2C%22deliveryPublicLink%22%3A%22%22%2C%22files%22%3A%5B%5D%7D"></div>
+					<div data-role="url-whitelist" data-upload-start-url="/start-upload"></div>
+					<input type="file" id="select-files-input" multiple="true" class="hidden">
+
+							<div data-role="alert-anchor">
+						</div>
+
+				<div id="snippet--upload-progress"><div class="intro" data-max-upload-bytes="6442450944">
+
+					<div class="spinner-wrapper-large hidden">
+						<div class="spinner"></div>
+						<!-- .spinner -->
+					</div>
+
+						<h1>
+						Simple and reliable file&nbsp;transfers
+						</h1>
+
+
+					<p>
+						<br>
+						<a class="btn btn-primary select-files" href="#" data-href="#upload">
+									<span class="icon-upload"></span>
+
+							Send files
+						</a>
+					</p>
+				</div>
+				<!-- .intro -->
+
+				</div>
+
+				<div class="alert alert-error alert-noremove alert-hidden" data-alert-occasion="too-big">
+					<span class="icon-times"></span>The maximum size of a data package is <span class="max-bytes"></span>.
+					<a href="#" class="alert-close"><span class="icon-times"></span></a>
+				</div>
+				<!-- .alert -->
+				<div class="alert alert-error alert-noremove alert-hidden" data-alert-occasion="unsupported-browser">
+					<span class="icon-times"></span>Your browser doesn't support technology needed for FileTransfer.io to work.<br/>Try again in another web browser.
+					<a href="#" class="alert-close"><span class="icon-times"></span></a>
+				</div>
+				<!-- .alert -->
+				<div class="alert alert-warning alert-noremove alert-hidden" data-alert-occasion="empty-file">
+					<span class="icon-times"></span>It isn't possible to send a file with no content.
+					<a href="#" class="alert-close"><span class="icon-times"></span></a>
+				</div>
+				<!-- .alert -->
+				<div class="alert alert-warning alert-noremove alert-hidden" data-alert-occasion="unsupported-drop">
+					This file cannot be dragged. Please select it by clicking the "<strong>choose from your device</strong>" button.
+					<a href="#" class="alert-close"><span class="icon-times"></span></a>
+				</div>
+				<!-- .alert -->
+				<div class="alert alert-warning alert-noremove alert-hidden" data-alert-occasion="directories">
+					<span class="icon-exclamation-triangle"></span>
+					<span class="single">The folder 		<span data-content="dirnames"></span>
+				 cannot be added all at once, please add the specific files it contains.</span>
+					<span class="multiple hidden">The folders 		<span data-content="dirnames"></span>
+				 cannot be added all at once, please add the specific files they contain.</span>
+					<a href="#" class="alert-close"><span class="icon-times"></span></a>
+				</div>
+				<!-- .alert -->
+				<div class="alert alert-reconnect alert-hidden" data-alert-occasion="disconnected">
+					<span class="gif-reconnect"></span>The connection was temporarily lost, we are waiting for its restoration…
+				</div>
+				<!-- .alert -->
+				<div class="alert alert-error alert-noremove alert-hidden" data-alert-occasion="total-size-exceeded">
+					<span class="icon-times"></span>You have too many data packages, you have to remove __REMOVE__ to send another.
+					You can switch to a <a href="/pricelist">paid plan</a> and send more data packages.
+				</div>
+				<!-- .alert -->
+				<div class="alert alert-error alert-noremove alert-hidden" data-alert-occasion="total-count-exceeded">
+					<span class="icon-times"></span>You have too many data packages, you have to remove __REMOVE__ data packages to send another.
+					You can switch to a <a href="/pricelist">paid plan</a> and send more data packages.
+				</div>
+				<!-- .alert -->
+				<div class="alert alert-error alert-hidden" data-alert-occasion="failed">
+					<span class="icon-times"></span>
+					<span data-reason="error">
+								The files couldn't be uploaded because of an error of the server. Please 		<a class="underline" rel="nofollow" href="/"><span class="underline-item">
+				reload the page</span></a>.
+								</span>
+								<span data-reason="ip" class="hidden">
+											Uploading from your IP address is prohibited due to violation of the 					<a rel="nofollow" href="/tos">
+				terms of our service</a>. If this is a mistake, please 						<a href="/contact/dGhlIHVwbG9hZCBmcm9tIG15IElQIGFkZHJlc3MgJWlwJSBpcyBmb3JiaWRkZW4sIGFsdGhvdWdoIHRoZXJlIHdhcyBubyB2aW9sYXRpb24gb2YgdGhlIHRlcm1zIG9mIHVzZSBvbiBteSBzaWRlLg==?category=2">
+				let us know</a>
+								</span>
+								<span data-reason="limit" class="hidden">
+									In 24 hours it is possible to send the maximum of __LIMIT__ data packages.
+									You can switch to a <a href="/pricelist">paid plan</a> and send more data packages.
+								</span>
+								<span data-reason="quota" class="hidden">
+									You have too many deliveries already. To send this delivery, delete some of your previous deliveries.
+								</span>
+				</div>
+				<div class="alert alert-warning alert-noremove alert-hidden" data-alert-occasion="duplicate">
+					<span class="icon-exclamation-triangle"></span>
+					<span class="single">The file 		<span data-content="filenames"></span>
+				 is already in your data package.</span>
+					<span class="multiple hidden">Files 		<span data-content="filenames"></span>
+				 are already in your data package.</span>
+					<a href="#" class="alert-close"><span class="icon-times"></span></a>
+				</div>
+				<!-- .alert -->
+
+									
+
+						</section>
+						<!-- .content -->
+
+		<hr>
+
+		<footer class="footer en" id="snippet--footer">
+				<div class="box columns-sep columns-gap-glued columns md-3">
+
+				<div class="column">
+					<div class="info">
+						<div class="info-icon">
+							<span class="sprite-info-send"></span>
+						</div>
+						<!-- .info-icon -->
+						<div class="info-content">
+								<h2 class="info-title">Send files up to 6&nbspGB</h2>
+						</div>
+						<!-- .info-content -->
+					</div>
+					<!-- .info -->
+				</div>
+				<!-- .column -->
+				<div class="column">
+					<div class="info">
+						<div class="info-icon">
+							<span class="sprite-info-download"></span>
+						</div>
+						<!-- .info-icon -->
+						<div class="info-content">
+							<h2 class="info-title">
+									Up to 50 downloads of your files
+							</h2>
+						</div>
+						<!-- .info-content -->
+					</div>
+					<!-- .info -->
+				</div>
+				<!-- .column -->
+				<div class="column">
+				<div class="info">
+				<div class="info-icon">
+					<span class="sprite-info-time"></span>
+				</div>
+				<!-- .info-icon -->
+				<div class="info-content">
+						<h2 class="info-title">Save the files for&nbsp;21&nbsp;days</h2>
+				</div>
+			<!-- .info-content -->
+			</div>
+			<!-- .info -->
+			</div>
+			<!-- .column -->
+			</div>
+			<!-- .columns -->
+
+
+			<nav class="footer-navigation">
+				<a title="Contact" class="underline" href="/contact">
+					<span class="underline-item">Contact</span>
+				</a>
+			&middot;
+				<a title="FAQ" class="underline" href="/frequent-questions">
+					<span class="underline-item">FAQ</span>
+				</a>
+			&middot;
+				<a title="Terms of use" class="underline" href="/tos">
+					<span class="underline-item">Terms of use</span>
+				</a>
+					&middot;
+				<a title="Pricing" class="underline" href="/pricelist">
+					<span class="underline-item">Pricing</span>
+				</a>
+			</nav>
+			<nav class="footer-navigation">
+					Alternative to
+					<a title="Alternative to WeTransfer" class="underline" href="/wetransfer">
+						<span class="underline-item">WeTransfer</span>
+					</a>
+					&middot;
+					<a title="Alternative to Anonfile" class="underline" href="/anonfile">
+						<span class="underline-item">Anonfile</span>
+					</a>
+					&middot;
+					<a title="Alternative to Filemail" class="underline" href="/filemail">
+						<span class="underline-item">Filemail</span>
+					</a>
+					&middot;
+					<a title="Alternative to pCloud" class="underline" href="/pcloud">
+						<span class="underline-item">pCloud</span>
+					</a>
+					&middot;
+					<a title="Alternative to Sendspace" class="underline" href="/sendspace">
+						<span class="underline-item">Sendspace</span>
+					</a>
+					&middot;
+					<a title="Alternative to Wesendit" class="underline" href="/wesendit">
+						<span class="underline-item">Wesendit</span>
+					</a>
+					&middot;
+					<a title="Alternative to Workupload" class="underline" href="/workupload">
+						<span class="underline-item">Workupload</span>
+					</a>
+					&middot;
+					<a title="Alternative to MyAirBridge" class="underline" href="/myairbridge">
+						<span class="underline-item">MyAirBridge</span>
+					</a>
+
+			</nav>
+
+			<div class="footer-copyright">
+
+				Copyright &copy; 2024 &ndash; FileTransfer.io, provided by <span class="sprite-palo-alto"></span>
+					TECHNOLOGY PARK OÜ
+			</div>
+
+		</footer>
+
+						<!--googleoff: all-->
+		<section class="content hidden" data-occasion="js-error" style="position: absolute; left: -10000px;">
+			<div class="content-header content-header-only">
+				<h1>An error occurred on the site</h1>
+
+				<h3>We are sorry.</h3>
+
+				<p>
+					<span class="sprite-wrench" style="-webkit-filter: grayscale(1);
+		    filter: grayscale(1);"></span>
+				</p>
+
+				<p>
+						If you'd like to be informed about the process of fixing this error, please click 			<a data-role="contact-url" rel="nofollow" href="/contact/2/CQkJCXdoaWxlIHVzaW5nIEZpbGVUcmFuc2Zlci5pbyBhbiBlcnJvciAiJWVycm9ySWQlIiBvY2N1cnJlZC4gUGxlYXNlIGluZm9ybSBtZSBhYm91dCB0aGUgcHJvY2VzcyBvZiBmaXhpbmcgdGhpcyBlcnJvci4K">
+		here</a>.
+				</p>
+
+				<p>
+					<a class="btn btn-primary btn-lg" rel="nofollow" href="/">
+						Back
+					</a>
+				</p>
+			</div>
+			<!-- .content-header -->
+		</section>
+						<!--googleon: all-->
+
+					</div>
+					<!-- .page -->
+				</div>
+				<!-- .container -->
+
+			</div>
+			<!-- .blur -->
+
+			
+			<a class="need-help" href="/contact">
+				<span class="icon-support"></span>Get help
+			</a>
+			<!-- .need-help -->
+
+			<div data-role="popups-container" class="popups-container">
+				<div data-role="popup-backdrop" class="popup-backdrop"></div>
+				<div data-role="popup-stack" class="popup-stack">
+				</div>
+			</div>
+
+
+
+
+
+<script src="/dist/scriptNew.bundle.af17f647d2ffcff12b35.js"></script>
+
+</body>
+</html>" type="video/mp4">
+                  Your browser does not support the video tag.
+              </video>
+            </div>
+            </div></div>
 </div>
 </section>
 <section id="extensions-and-much-more">
@@ -592,7 +1035,8 @@ document.write(`
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -603,6 +1047,7 @@ document.write(`
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interactivity">Interactivity</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizations">Visualizations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interact-with-elements-in-visualizations">Interact with elements in visualizations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extensions-and-much-more">Extensions and much more!</a></li>
 </ul>
   </nav></div>
@@ -652,8 +1097,8 @@ By Naresh Kumar Devulapally
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
 
   <footer class="bd-footer">
   </footer>
