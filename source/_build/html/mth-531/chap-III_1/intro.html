@@ -453,14 +453,25 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/0eef1aaf644c6f862e4805854e7d4ff6e090240d678e0c215d5fe1e5d46c6739.png" src="../../_images/0eef1aaf644c6f862e4805854e7d4ff6e090240d678e0c215d5fe1e5d46c6739.png" />
 </div>
-<details class="toggle-details" open>
-  <summary class="toggle-details__summary"> ⧨ Toggle plt GIFs</summary>
-  <div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap;">
-    <img src="../../_static/media/sequence_convergence.gif" style="width: 45%; max-width: 100%; margin-right: 10px;"/> 
-    <img src="../../_static/media/sequence_divergence.gif" style="width: 45%; max-width: 100%;"/>
-  </div>
-</details></section>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">plotly.express</span> <span class="k">as</span> <span class="nn">px</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">iris</span><span class="p">()</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;sepal_width&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;sepal_length&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;species&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;A Plotly Express Figure&quot;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">

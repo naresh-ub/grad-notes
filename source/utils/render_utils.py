@@ -195,11 +195,11 @@ def start():
 
 q_dict = {'-ql': (480, 854, 15), '-qm': (720, 1280, 30), '-qh': (1080, 1920, 60), '-qk': (2160, 3840, 60)}
 
-def render_manim(scene_class, quality):
+def render_manim(scene_class, quality = "-qm"):
     log_capture_string, ch, logger = start()
     config.flush_cache = True
     config.pixel_height, config.pixel_width, config.frame_rate = q_dict[quality]
-    scene = scene_class()
+    scene = scene_class
     show_local(scene, log_capture_string)
 
 def show_local(sc, log_capture_string):
