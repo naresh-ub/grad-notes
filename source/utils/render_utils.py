@@ -193,12 +193,12 @@ def start():
     logger.addHandler(ch)
     return log_capture_string, ch, logger
 
-q_dict = {'-ql': (480, 854, 15), '-qm': (720, 1280, 30), '-qh': (1080, 1920, 60), '-qk': (2160, 3840, 60)}
+# q_dict = {'-ql': (480, 854, 15), '-qm': (720, 1280, 30), '-qh': (1080, 1920, 60), '-qk': (2160, 3840, 60)}
 
-def render_manim(scene_class, quality = "-qm"):
+def render_manim(scene_class):
     log_capture_string, ch, logger = start()
     config.flush_cache = True
-    config.pixel_height, config.pixel_width, config.frame_rate = q_dict[quality]
+    config.pixel_height, config.pixel_width, config.frame_rate = (1080, 1920, 60)
     scene = scene_class
     show_local(scene, log_capture_string)
 
