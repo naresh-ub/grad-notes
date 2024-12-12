@@ -143,3 +143,8 @@ html[data-theme="dark"] img:not(.only-dark, .dark-light) {
     filter: none !important;
 }
 
+video {
+    width: 100%;
+    height: auto;
+}
+
