@@ -44,9 +44,9 @@ parts:
       # - file: start/publish
       # - file: start/example-book
     - file: mth-531/chap-III_1/intro
-- caption:
-  chapters:
-  - file: tikz/intro
+# - caption:
+#   chapters:
+#   - file: tikz/intro
     # sections:
     # - file: mth-531/pre-reqs/intro
     #   sections:
