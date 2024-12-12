@@ -1,31 +1,36 @@
 from manim import *
 
-class FollowingGraphCamera(MovingCameraScene):
-    def __init__(self, graph_function, **kwargs):
+class Plot(Scene):
+    def __init__(self, graph_function, x_range = (-5, 5), y_range = (-5, 5), labels = True, **kwargs):
         super().__init__(**kwargs)
         self.graph_function = graph_function
-
+        self.x_range = x_range
+        self.y_range = y_range
+        self.points = np.linspace(x_range[0], x_range[1], 200)
+        self.labels = labels
+        
     def construct(self):
-        self.camera.frame.save_state()
+        # Define the axes
+        axes = Axes(
+            x_range=self.x_range,  # Adjusted range for better visibility
+            y_range=self.y_range,
+            y_length=7,
+            x_length=7,
+            tips=False
+        )
+        if self.labels:
+            axes.add_coordinates(font_size=25)
 
-        # Create the axes and the curve using the input function
-        ax = Axes(x_range=[-10, 10], y_range=[-10, 10])
-        graph = ax.plot(self.graph_function, color=BLUE)
+        self.play(Write(axes))
 
-        # Create dots based on the graph
-        moving_dot = Dot(ax.i2gp(graph.t_min, graph), color=ORANGE)
-        dot_1 = Dot(ax.i2gp(graph.t_min, graph))
-        dot_2 = Dot(ax.i2gp(graph.t_max, graph))
+        # Generate values using linspace and the function
+        x_values = self.points
+        y_values = self.graph_function(x_values)
 
-        self.add(ax, graph, dot_1, dot_2, moving_dot)
-        self.play(self.camera.frame.animate.scale(0.5).move_to(moving_dot))
+        # Convert to points for plotting
+        points = [axes.c2p(x, y) for x, y in zip(x_values, y_values)]
+        cos_curve = VMobject(color=RED).set_points_smoothly(points)
 
-        def update_curve(mob):
-            mob.move_to(moving_dot.get_center())
-
-        self.camera.frame.add_updater(update_curve)
-        self.play(MoveAlongPath(moving_dot, graph, rate_func=linear))
-        self.camera.frame.remove_updater(update_curve)
-
-        self.play(Restore(self.camera.frame))
-        self.wait(3)
+        # Plot the curve
+        self.play(Create(cos_curve))
+        self.wait(2)
