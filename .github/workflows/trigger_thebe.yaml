@@ -3,7 +3,10 @@ name: Trigger Binder Every 6 Hours
 on:
   schedule:
     # Runs every 6 hours (at 12:00 AM, 6:00 AM, 12:00 PM, and 6:00 PM UTC)
-    - cron: '0 */6 * * *'
+    # - cron: '0 */6 * * *'
+
+    # Runs every 2 days at 12:00 AM UTC
+    - cron: '0 0 */2 * *'
   workflow_dispatch:  # Allows manual trigger via GitHub UI
 
 jobs:
